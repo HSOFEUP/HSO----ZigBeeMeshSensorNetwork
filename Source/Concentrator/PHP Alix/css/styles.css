@@ -1,0 +1,95 @@
+/* CSS Document */
+
+body{
+	margin: 0px;
+	padding: 0px;
+	background-image: url(../images/wallpaper6.jpg);
+}
+
+
+#session_options {
+	float: left;
+	width: 100%;
+	border-bottom: 1px solid #CCC;
+	background: #E9E9E9;
+	color: #333;
+	min-height: 28px;
+	padding-top: 7px;
+	text-align: right;
+}
+.error {
+	font-weight: bold;
+	color: #FF0000;	
+}
+.success {
+	font-weight: bold;
+	color: #090;	
+}
+/*
+#Box {
+	float:  inherit;
+	width: 200px;
+	min-height: 200px;
+	border: 1px solid #CCC;
+	margin-left: 20%;
+	padding-top: 0px;
+	padding-bottom:15px;
+	padding-left:15px;
+	padding-right:15px;	
+}*/
+
+#Box {
+	background-color: #FFF;
+	color: #06F;
+	top: 10%;
+	border: 10px outset #09F;
+	width: 38%;
+	margin-left:30%;
+	position: relative;
+	font-family: "Times New Roman", Times, serif;
+	font-size: 18px;
+	font-weight: bold;
+	text-align: center;
+	cursor: text;
+	background-image: url(../images/fundo.jpg);
+
+}
+
+h5{
+	color: #F33;
+	font-family:  "Palatino Linotype", "Book Antiqua", Palatino, serif;
+	font-size: 12px;
+}
+
+
+h4{
+	color: #0C0;
+	font-family:  "Palatino Linotype", "Book Antiqua", Palatino, serif;
+	font-size: 12px;
+}
+
+h3{
+	color: #06F;
+	font-family:  Georgia, "Times New Roman", Times, serif;
+	font-size: 12px;
+	text-align: center;
+}
+
+h2{
+	color: #06F;
+	font-family:  "Palatino Linotype", "Book Antiqua", Palatino, serif;
+	font-size: 18px;
+	text-align: center;
+	margin-right:10px;
+	text-decoration: underline;
+}
+
+#botao  {
+	position:inherit;
+	width:12%;
+	top:0px;
+	left:12px;
+	margin:0px;
+	padding:0px;
+	display: inline;
+}

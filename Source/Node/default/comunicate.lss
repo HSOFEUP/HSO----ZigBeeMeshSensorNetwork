@@ -1,0 +1,3361 @@
+
+comunicate.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000010a8  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000004  00800060  000010a8  0000113c  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          0000005c  00800064  00800064  00001140  2**0
+                  ALLOC
+  3 .debug_aranges 000000a0  00000000  00000000  00001140  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_pubnames 000003fe  00000000  00000000  000011e0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00000fe6  00000000  00000000  000015de  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 00000687  00000000  00000000  000025c4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   000013f9  00000000  00000000  00002c4b  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  000002e0  00000000  00000000  00004044  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    0000057a  00000000  00000000  00004324  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    00000c9d  00000000  00000000  0000489e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000048  00000000  00000000  0000553b  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+       0:	12 c0       	rjmp	.+36     	; 0x26 <__ctors_end>
+       2:	2c c0       	rjmp	.+88     	; 0x5c <__bad_interrupt>
+       4:	2b c0       	rjmp	.+86     	; 0x5c <__bad_interrupt>
+       6:	2a c0       	rjmp	.+84     	; 0x5c <__bad_interrupt>
+       8:	54 c0       	rjmp	.+168    	; 0xb2 <__vector_4>
+       a:	28 c0       	rjmp	.+80     	; 0x5c <__bad_interrupt>
+       c:	27 c0       	rjmp	.+78     	; 0x5c <__bad_interrupt>
+       e:	26 c0       	rjmp	.+76     	; 0x5c <__bad_interrupt>
+      10:	25 c0       	rjmp	.+74     	; 0x5c <__bad_interrupt>
+      12:	e0 c1       	rjmp	.+960    	; 0x3d4 <__vector_9>
+      14:	23 c0       	rjmp	.+70     	; 0x5c <__bad_interrupt>
+      16:	22 c0       	rjmp	.+68     	; 0x5c <__bad_interrupt>
+      18:	21 c0       	rjmp	.+66     	; 0x5c <__bad_interrupt>
+      1a:	20 c0       	rjmp	.+64     	; 0x5c <__bad_interrupt>
+      1c:	1f c0       	rjmp	.+62     	; 0x5c <__bad_interrupt>
+      1e:	1e c0       	rjmp	.+60     	; 0x5c <__bad_interrupt>
+      20:	1d c0       	rjmp	.+58     	; 0x5c <__bad_interrupt>
+      22:	1c c0       	rjmp	.+56     	; 0x5c <__bad_interrupt>
+      24:	1b c0       	rjmp	.+54     	; 0x5c <__bad_interrupt>
+
+00000026 <__ctors_end>:
+      26:	11 24       	eor	r1, r1
+      28:	1f be       	out	0x3f, r1	; 63
+      2a:	cf e5       	ldi	r28, 0x5F	; 95
+      2c:	d4 e0       	ldi	r29, 0x04	; 4
+      2e:	de bf       	out	0x3e, r29	; 62
+      30:	cd bf       	out	0x3d, r28	; 61
+
+00000032 <__do_copy_data>:
+      32:	10 e0       	ldi	r17, 0x00	; 0
+      34:	a0 e6       	ldi	r26, 0x60	; 96
+      36:	b0 e0       	ldi	r27, 0x00	; 0
+      38:	e8 ea       	ldi	r30, 0xA8	; 168
+      3a:	f0 e1       	ldi	r31, 0x10	; 16
+      3c:	02 c0       	rjmp	.+4      	; 0x42 <.do_copy_data_start>
+
+0000003e <.do_copy_data_loop>:
+      3e:	05 90       	lpm	r0, Z+
+      40:	0d 92       	st	X+, r0
+
+00000042 <.do_copy_data_start>:
+      42:	a4 36       	cpi	r26, 0x64	; 100
+      44:	b1 07       	cpc	r27, r17
+      46:	d9 f7       	brne	.-10     	; 0x3e <.do_copy_data_loop>
+
+00000048 <__do_clear_bss>:
+      48:	10 e0       	ldi	r17, 0x00	; 0
+      4a:	a4 e6       	ldi	r26, 0x64	; 100
+      4c:	b0 e0       	ldi	r27, 0x00	; 0
+      4e:	01 c0       	rjmp	.+2      	; 0x52 <.do_clear_bss_start>
+
+00000050 <.do_clear_bss_loop>:
+      50:	1d 92       	st	X+, r1
+
+00000052 <.do_clear_bss_start>:
+      52:	a0 3c       	cpi	r26, 0xC0	; 192
+      54:	b1 07       	cpc	r27, r17
+      56:	e1 f7       	brne	.-8      	; 0x50 <.do_clear_bss_loop>
+      58:	b1 d0       	rcall	.+354    	; 0x1bc <main>
+      5a:	24 c8       	rjmp	.-4024   	; 0xfffff0a4 <__eeprom_end+0xff7ef0a4>
+
+0000005c <__bad_interrupt>:
+      5c:	d1 cf       	rjmp	.-94     	; 0x0 <__vectors>
+
+0000005e <init>:
+uint16_t normal_mode=0, sleep_time=1, sleep_time_aux;
+uint32_t DH=0x000000000000, DL=0x000000000000;
+
+void init (void)
+{
+	OSCCAL=0xD2; 								// To calibrate Internal RC
+      5e:	82 ed       	ldi	r24, 0xD2	; 210
+      60:	81 bf       	out	0x31, r24	; 49
+	// INIT_T2
+	bit_set(ASSR,AS2); 							// Enable asynchronous mode
+      62:	82 b5       	in	r24, 0x22	; 34
+      64:	88 60       	ori	r24, 0x08	; 8
+      66:	82 bd       	out	0x22, r24	; 34
+	bit_set(TIMSK,TOIE2); 						// Timer/Counter 2 Overflow Interrupt Enable
+      68:	89 b7       	in	r24, 0x39	; 57
+      6a:	80 64       	ori	r24, 0x40	; 64
+      6c:	89 bf       	out	0x39, r24	; 57
+	bit_set(TIFR,TOV2); 						// Clear TOV2
+      6e:	88 b7       	in	r24, 0x38	; 56
+      70:	80 64       	ori	r24, 0x40	; 64
+      72:	88 bf       	out	0x38, r24	; 56
+	TCNT2=0; 									// Init Timer Count 2
+      74:	14 bc       	out	0x24, r1	; 36
+	TCCR2 = ((1<<CS22)|(0<<CS21)|(1<<CS20)); 	// Timer Clock = system clock / 128 => TIOV=1s
+      76:	85 e0       	ldi	r24, 0x05	; 5
+      78:	85 bd       	out	0x25, r24	; 37
+	while(ASSR & _BV(TCN2UB));            		// Wait until TC2 is updated 
+      7a:	02 b4       	in	r0, 0x22	; 34
+      7c:	02 fc       	sbrc	r0, 2
+      7e:	fd cf       	rjmp	.-6      	; 0x7a <init+0x1c>
+
+	//init AD --> ADC0
+	ADMUX = ((0<<REFS1)|(0<<REFS0)|(0<<MUX3)|((0<<MUX2))|(0<<MUX1)); 	//AVCCwith external capacitor at AREF pin & ADC0
+      80:	17 b8       	out	0x07, r1	; 7
+	ADCSRA = ((1<<ADEN)|(0<<ADFR)|(1<<ADPS2)|(0<<ADPS1)|(0<<ADPS0));  	//ADC clock=systemclock/16 --> 125KHz
+      82:	84 e8       	ldi	r24, 0x84	; 132
+      84:	86 b9       	out	0x06, r24	; 6
+
+	//INIT Timer0
+	TCCR0 = ((1<<CS02)|(0<<CS01)|(1<<CS00)); // Timer Clock = system clock / 1024 => TIOV=0,131s
+      86:	85 e0       	ldi	r24, 0x05	; 5
+      88:	83 bf       	out	0x33, r24	; 51
+	//bit_set(TIMSK,TOIE0); //Timer/Counter 0 Overflow Interrupt Enable
+	TCNT0 = 0x00;     // Init Timer Count 0
+      8a:	12 be       	out	0x32, r1	; 50
+}
+      8c:	08 95       	ret
+
+0000008e <sleepNow>:
+
+void sleepNow()		// here we put the atmega8 to sleep
+{
+	set_sleep_mode(SLEEP_MODE_PWR_SAVE);   	// sleep mode is set here
+      8e:	85 b7       	in	r24, 0x35	; 53
+      90:	8f 78       	andi	r24, 0x8F	; 143
+      92:	80 63       	ori	r24, 0x30	; 48
+      94:	85 bf       	out	0x35, r24	; 53
+	sleep_enable();
+      96:	85 b7       	in	r24, 0x35	; 53
+      98:	80 68       	ori	r24, 0x80	; 128
+      9a:	85 bf       	out	0x35, r24	; 53
+	sleep_mode();							// here the device is actually put to sleep!!
+      9c:	85 b7       	in	r24, 0x35	; 53
+      9e:	80 68       	ori	r24, 0x80	; 128
+      a0:	85 bf       	out	0x35, r24	; 53
+      a2:	88 95       	sleep
+      a4:	85 b7       	in	r24, 0x35	; 53
+      a6:	8f 77       	andi	r24, 0x7F	; 127
+      a8:	85 bf       	out	0x35, r24	; 53
+                   							// THE PROGRAM CONTINUES FROM HERE AFTER WAKING UP
+	sleep_disable();						// first thing after waking from sleep:
+      aa:	85 b7       	in	r24, 0x35	; 53
+      ac:	8f 77       	andi	r24, 0x7F	; 127
+      ae:	85 bf       	out	0x35, r24	; 53
+}
+      b0:	08 95       	ret
+
+000000b2 <__vector_4>:
+
+ISR(TIMER2_OVF_vect)
+{
+      b2:	1f 92       	push	r1
+      b4:	0f 92       	push	r0
+      b6:	0f b6       	in	r0, 0x3f	; 63
+      b8:	0f 92       	push	r0
+      ba:	11 24       	eor	r1, r1
+      bc:	8f 93       	push	r24
+      be:	9f 93       	push	r25
+	count_sleep++;
+      c0:	80 91 64 00 	lds	r24, 0x0064
+      c4:	90 91 65 00 	lds	r25, 0x0065
+      c8:	01 96       	adiw	r24, 0x01	; 1
+      ca:	90 93 65 00 	sts	0x0065, r25
+      ce:	80 93 64 00 	sts	0x0064, r24
+}
+      d2:	9f 91       	pop	r25
+      d4:	8f 91       	pop	r24
+      d6:	0f 90       	pop	r0
+      d8:	0f be       	out	0x3f, r0	; 63
+      da:	0f 90       	pop	r0
+      dc:	1f 90       	pop	r1
+      de:	18 95       	reti
+
+000000e0 <tsl2561_end>:
+	_delay_ms(200);
+}
+
+void tsl2561_end()
+{
+	TSL2561_POWER_DOWN;
+      e0:	c2 98       	cbi	0x18, 2	; 24
+}
+      e2:	08 95       	ret
+
+000000e4 <read_sound_preasure>:
+
+uint16_t read_sound_preasure(uint8_t size_window, uint8_t number_samples, uint8_t exp_base_2) //Read RMS value of sound pressuare. Attention: 2^exp_base_2=number_samples; filtro passa-baixo com a média e com a mediana tiro o valor que mais representa a amostra; perco no mínimo um 1bit
+{
+      e4:	cf 92       	push	r12
+      e6:	df 92       	push	r13
+      e8:	ef 92       	push	r14
+      ea:	ff 92       	push	r15
+      ec:	0f 93       	push	r16
+      ee:	1f 93       	push	r17
+      f0:	df 93       	push	r29
+      f2:	cf 93       	push	r28
+      f4:	cd b7       	in	r28, 0x3d	; 61
+      f6:	de b7       	in	r29, 0x3e	; 62
+      f8:	62 97       	sbiw	r28, 0x12	; 18
+      fa:	0f b6       	in	r0, 0x3f	; 63
+      fc:	f8 94       	cli
+      fe:	de bf       	out	0x3e, r29	; 62
+     100:	0f be       	out	0x3f, r0	; 63
+     102:	cd bf       	out	0x3d, r28	; 61
+     104:	08 2f       	mov	r16, r24
+     106:	e6 2e       	mov	r14, r22
+     108:	f4 2e       	mov	r15, r20
+     10a:	fe 01       	movw	r30, r28
+     10c:	31 96       	adiw	r30, 0x01	; 1
+uint8_t i, j, k;
+uint32_t sum=0;
+uint16_t vect_average[SIZE_WINDOW], temp;
+	for(i=0; i<size_window; i++)
+     10e:	68 2f       	mov	r22, r24
+     110:	70 e0       	ldi	r23, 0x00	; 0
+     112:	66 0f       	add	r22, r22
+     114:	77 1f       	adc	r23, r23
+     116:	6f 01       	movw	r12, r30
+     118:	6e 0f       	add	r22, r30
+     11a:	7f 1f       	adc	r23, r31
+     11c:	18 c0       	rjmp	.+48     	; 0x14e <read_sound_preasure+0x6a>
+	{
+		for (j=0; j<number_samples; j++)
+		{
+			ADCSRA |= (1<<ADSC);
+     11e:	36 9a       	sbi	0x06, 6	; 6
+			while (ADCSRA &  (1<<ADSC)); 	// wait until conversion  completes; ADSC=0 means Complete
+     120:	36 99       	sbic	0x06, 6	; 6
+     122:	fe cf       	rjmp	.-4      	; 0x120 <read_sound_preasure+0x3c>
+			sum = sum + ADC;				//Store ADC Value
+     124:	84 b1       	in	r24, 0x04	; 4
+     126:	95 b1       	in	r25, 0x05	; 5
+     128:	a0 e0       	ldi	r26, 0x00	; 0
+     12a:	b0 e0       	ldi	r27, 0x00	; 0
+     12c:	28 0f       	add	r18, r24
+     12e:	39 1f       	adc	r19, r25
+     130:	4a 1f       	adc	r20, r26
+     132:	5b 1f       	adc	r21, r27
+uint8_t i, j, k;
+uint32_t sum=0;
+uint16_t vect_average[SIZE_WINDOW], temp;
+	for(i=0; i<size_window; i++)
+	{
+		for (j=0; j<number_samples; j++)
+     134:	1f 5f       	subi	r17, 0xFF	; 255
+     136:	1e 15       	cp	r17, r14
+     138:	90 f3       	brcs	.-28     	; 0x11e <read_sound_preasure+0x3a>
+		{
+			ADCSRA |= (1<<ADSC);
+			while (ADCSRA &  (1<<ADSC)); 	// wait until conversion  completes; ADSC=0 means Complete
+			sum = sum + ADC;				//Store ADC Value
+		}
+		vect_average[i]=sum>>exp_base_2;
+     13a:	0f 2c       	mov	r0, r15
+     13c:	04 c0       	rjmp	.+8      	; 0x146 <read_sound_preasure+0x62>
+     13e:	56 95       	lsr	r21
+     140:	47 95       	ror	r20
+     142:	37 95       	ror	r19
+     144:	27 95       	ror	r18
+     146:	0a 94       	dec	r0
+     148:	d2 f7       	brpl	.-12     	; 0x13e <read_sound_preasure+0x5a>
+     14a:	21 93       	st	Z+, r18
+     14c:	31 93       	st	Z+, r19
+uint16_t read_sound_preasure(uint8_t size_window, uint8_t number_samples, uint8_t exp_base_2) //Read RMS value of sound pressuare. Attention: 2^exp_base_2=number_samples; filtro passa-baixo com a média e com a mediana tiro o valor que mais representa a amostra; perco no mínimo um 1bit
+{
+uint8_t i, j, k;
+uint32_t sum=0;
+uint16_t vect_average[SIZE_WINDOW], temp;
+	for(i=0; i<size_window; i++)
+     14e:	e6 17       	cp	r30, r22
+     150:	f7 07       	cpc	r31, r23
+     152:	31 f0       	breq	.+12     	; 0x160 <read_sound_preasure+0x7c>
+     154:	10 e0       	ldi	r17, 0x00	; 0
+     156:	20 e0       	ldi	r18, 0x00	; 0
+     158:	30 e0       	ldi	r19, 0x00	; 0
+     15a:	40 e0       	ldi	r20, 0x00	; 0
+     15c:	50 e0       	ldi	r21, 0x00	; 0
+     15e:	eb cf       	rjmp	.-42     	; 0x136 <read_sound_preasure+0x52>
+     160:	06 95       	lsr	r16
+     162:	06 95       	lsr	r16
+     164:	e0 2f       	mov	r30, r16
+     166:	f0 e0       	ldi	r31, 0x00	; 0
+     168:	31 96       	adiw	r30, 0x01	; 1
+     16a:	ee 0f       	add	r30, r30
+     16c:	ff 1f       	adc	r31, r31
+     16e:	ec 0d       	add	r30, r12
+     170:	fd 1d       	adc	r31, r13
+			}			
+		}			
+
+	}
+return(vect_average[(size_window>>2)+1]);
+}
+     172:	80 81       	ld	r24, Z
+     174:	91 81       	ldd	r25, Z+1	; 0x01
+     176:	62 96       	adiw	r28, 0x12	; 18
+     178:	0f b6       	in	r0, 0x3f	; 63
+     17a:	f8 94       	cli
+     17c:	de bf       	out	0x3e, r29	; 62
+     17e:	0f be       	out	0x3f, r0	; 63
+     180:	cd bf       	out	0x3d, r28	; 61
+     182:	cf 91       	pop	r28
+     184:	df 91       	pop	r29
+     186:	1f 91       	pop	r17
+     188:	0f 91       	pop	r16
+     18a:	ff 90       	pop	r15
+     18c:	ef 90       	pop	r14
+     18e:	df 90       	pop	r13
+     190:	cf 90       	pop	r12
+     192:	08 95       	ret
+
+00000194 <tsl2561_start>:
+
+void tsl2561_start()
+{	
+	//After wake-up it's needed 
+	//to clearing and then resetting the TWEN and the TWSTO bit
+	TWCR =((0<<TWSTO)|(1<<TWEN));
+     194:	84 e0       	ldi	r24, 0x04	; 4
+     196:	86 bf       	out	0x36, r24	; 54
+	TWCR =(0<<TWEN); 
+     198:	16 be       	out	0x36, r1	; 54
+
+	TSL2561_POWER_UP;
+     19a:	c2 9a       	sbi	0x18, 2	; 24
+    milliseconds can be achieved.
+ */
+void
+_delay_loop_2(uint16_t __count)
+{
+	__asm__ volatile (
+     19c:	80 ed       	ldi	r24, 0xD0	; 208
+     19e:	97 e0       	ldi	r25, 0x07	; 7
+     1a0:	01 97       	sbiw	r24, 0x01	; 1
+     1a2:	f1 f7       	brne	.-4      	; 0x1a0 <tsl2561_start+0xc>
+	_delay_ms(4);
+	tsl2561_init(TSL_ADDRESS);
+     1a4:	82 e7       	ldi	r24, 0x72	; 114
+     1a6:	1f d7       	rcall	.+3646   	; 0xfe6 <tsl2561_init>
+     1a8:	80 ed       	ldi	r24, 0xD0	; 208
+     1aa:	97 e0       	ldi	r25, 0x07	; 7
+     1ac:	22 e3       	ldi	r18, 0x32	; 50
+     1ae:	30 e0       	ldi	r19, 0x00	; 0
+     1b0:	f9 01       	movw	r30, r18
+     1b2:	31 97       	sbiw	r30, 0x01	; 1
+     1b4:	f1 f7       	brne	.-4      	; 0x1b2 <tsl2561_start+0x1e>
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+		{
+			// wait 1/10 ms
+			_delay_loop_2(((F_CPU) / 4e3) / 10);
+			__ticks --;
+     1b6:	01 97       	sbiw	r24, 0x01	; 1
+		__ticks = 1;
+	else if (__tmp > 65535)
+	{
+		//	__ticks = requested delay in 1/10 ms
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+     1b8:	d9 f7       	brne	.-10     	; 0x1b0 <tsl2561_start+0x1c>
+	_delay_ms(200);
+}
+     1ba:	08 95       	ret
+
+000001bc <main>:
+	}
+return(vect_average[(size_window>>2)+1]);
+}
+
+int main(void)
+{
+     1bc:	5f 92       	push	r5
+     1be:	6f 92       	push	r6
+     1c0:	7f 92       	push	r7
+     1c2:	8f 92       	push	r8
+     1c4:	9f 92       	push	r9
+     1c6:	af 92       	push	r10
+     1c8:	bf 92       	push	r11
+     1ca:	cf 92       	push	r12
+     1cc:	df 92       	push	r13
+     1ce:	ef 92       	push	r14
+     1d0:	ff 92       	push	r15
+     1d2:	0f 93       	push	r16
+     1d4:	1f 93       	push	r17
+     1d6:	df 93       	push	r29
+     1d8:	cf 93       	push	r28
+     1da:	cd b7       	in	r28, 0x3d	; 61
+     1dc:	de b7       	in	r29, 0x3e	; 62
+     1de:	2a 97       	sbiw	r28, 0x0a	; 10
+     1e0:	0f b6       	in	r0, 0x3f	; 63
+     1e2:	f8 94       	cli
+     1e4:	de bf       	out	0x3e, r29	; 62
+     1e6:	0f be       	out	0x3f, r0	; 63
+     1e8:	cd bf       	out	0x3d, r28	; 61
+//INICIALIZACOES
+uint8_t data_tx[SIZE_SENSORS_TX], res_xbee_func;
+uint16_t full_light_value, visible_light_value, ir_light_value, lux_light_value, dba_sound_value;
+UART_Init(12); 		// UBRR=12 --> BR=9600 c/ fosc=2MHz
+     1ea:	8c e0       	ldi	r24, 0x0C	; 12
+     1ec:	90 e0       	ldi	r25, 0x00	; 0
+     1ee:	0e d1       	rcall	.+540    	; 0x40c <UART_Init>
+init();
+     1f0:	36 df       	rcall	.-404    	; 0x5e <init>
+I2C_init();			// Inicia i2c define velocidade do bitrate
+     1f2:	4d d5       	rcall	.+2714   	; 0xc8e <I2C_init>
+
+bit_set(DDRB, PB0); // Pin PB0 is an output (Varef)
+     1f4:	b8 9a       	sbi	0x17, 0	; 23
+//bit_set(DDRB, PB1); // Pin PB1 is an output
+bit_set(DDRB, PB2); // Vcc to TSL2561
+     1f6:	ba 9a       	sbi	0x17, 2	; 23
+bit_set(DDRC, PC1); // SLEEP_XBEE (When High Xbee sleep)
+     1f8:	a1 9a       	sbi	0x14, 1	; 20
+bit_set(DDRD, PD5); // XBEE(PIN 16 - RTS)
+     1fa:	8d 9a       	sbi	0x11, 5	; 17
+bit_set(DDRD, PD7); // Vcc to Sound Sensor
+     1fc:	8f 9a       	sbi	0x11, 7	; 17
+
+//bit_clear(PORTB, 0);
+bit_clear(PORTB, 1);
+     1fe:	c1 98       	cbi	0x18, 1	; 24
+
+CTS_XBEE_OFF;
+     200:	95 9a       	sbi	0x12, 5	; 18
+     202:	80 e1       	ldi	r24, 0x10	; 16
+     204:	97 e2       	ldi	r25, 0x27	; 39
+     206:	22 e3       	ldi	r18, 0x32	; 50
+     208:	30 e0       	ldi	r19, 0x00	; 0
+     20a:	f9 01       	movw	r30, r18
+     20c:	31 97       	sbiw	r30, 0x01	; 1
+     20e:	f1 f7       	brne	.-4      	; 0x20c <main+0x50>
+		{
+			// wait 1/10 ms
+			_delay_loop_2(((F_CPU) / 4e3) / 10);
+			__ticks --;
+     210:	01 97       	sbiw	r24, 0x01	; 1
+		__ticks = 1;
+	else if (__tmp > 65535)
+	{
+		//	__ticks = requested delay in 1/10 ms
+		__ticks = (uint16_t) (__ms * 10.0);
+		while(__ticks)
+     212:	d9 f7       	brne	.-10     	; 0x20a <main+0x4e>
+
+_delay_ms (1000);
+
+count_sleep=0;
+     214:	10 92 65 00 	sts	0x0065, r1
+     218:	10 92 64 00 	sts	0x0064, r1
+sei(); 				//enable_interrupts() <=> bit_set(SREG,7)
+     21c:	78 94       	sei
+			//Read Sound Sensor
+			dba_sound_value=read_sound_preasure(5,8,3);
+			SLEEP_XBEE_OFF;			// Acorda modulo Xbee
+			SOUND_SENSOR_OFF;
+			V_AREF_OFF;
+			data_tx[7] = 2;
+     21e:	12 e0       	ldi	r17, 0x02	; 2
+     220:	51 2e       	mov	r5, r17
+			data_tx[8]=(uint8_t)(dba_sound_value>>8);
+			data_tx[9]=(uint8_t)(dba_sound_value);
+			res_xbee_func = TX_req_64bit(DL, DH, data_tx, SIZE_SENSORS_TX);
+     222:	4e 01       	movw	r8, r28
+     224:	08 94       	sec
+     226:	81 1c       	adc	r8, r1
+     228:	91 1c       	adc	r9, r1
+			full_light_value = tsl2561_read_ch0(TSL_ADDRESS);
+			ir_light_value = tsl2561_read_ch1(TSL_ADDRESS);
+			lux_light_value = tsl2561_calc_lux(0, TSL_TINT, full_light_value, ir_light_value);
+			tsl2561_end();
+			visible_light_value = full_light_value - ir_light_value;
+			data_tx[0]=1; // ID_Sensor Luz
+     22a:	77 24       	eor	r7, r7
+     22c:	73 94       	inc	r7
+			//Read Sound Sensor
+			dba_sound_value=read_sound_preasure(5,8,3);
+			SLEEP_XBEE_OFF;			// Acorda modulo Xbee
+			SOUND_SENSOR_OFF;
+			V_AREF_OFF;
+			data_tx[7] = 2;
+     22e:	b2 e0       	ldi	r27, 0x02	; 2
+     230:	6b 2e       	mov	r6, r27
+			if(res_xbee_func==0)
+				sleep_time=sleep_time_aux;
+			if(res_xbee_func==1)
+				sleep_time=SLEEP_TIME_DEF;
+			if(res_xbee_func==0xFF)
+				{sleep_time=SLEEP_TIME_DEF; normal_mode=0;}
+     232:	a5 e0       	ldi	r26, 0x05	; 5
+     234:	ca 2e       	mov	r12, r26
+     236:	d1 2c       	mov	r13, r1
+     238:	f8 e8       	ldi	r31, 0x88	; 136
+     23a:	af 2e       	mov	r10, r31
+     23c:	f3 e1       	ldi	r31, 0x13	; 19
+     23e:	bf 2e       	mov	r11, r31
+     240:	42 c0       	rjmp	.+132    	; 0x2c6 <main+0x10a>
+
+while(1)
+{
+	while(normal_mode==0)
+	{
+	bit_toggle(PORTB,1);
+     242:	88 b3       	in	r24, 0x18	; 24
+     244:	85 25       	eor	r24, r5
+     246:	88 bb       	out	0x18, r24	; 24
+		if(count_sleep >= SLEEP_TIME_DEF)
+     248:	80 91 64 00 	lds	r24, 0x0064
+     24c:	90 91 65 00 	lds	r25, 0x0065
+     250:	05 97       	sbiw	r24, 0x05	; 5
+     252:	b8 f1       	brcs	.+110    	; 0x2c2 <main+0x106>
+		{
+		bit_clear(TIMSK,TOIE2); // Dessativa interrupcao Timer2
+     254:	89 b7       	in	r24, 0x39	; 57
+     256:	8f 7b       	andi	r24, 0xBF	; 191
+     258:	89 bf       	out	0x39, r24	; 57
+		SLEEP_XBEE_OFF;			// Acorda o modulo Xbee
+     25a:	a9 98       	cbi	0x15, 1	; 21
+     25c:	c5 01       	movw	r24, r10
+     25e:	01 97       	sbiw	r24, 0x01	; 1
+     260:	f1 f7       	brne	.-4      	; 0x25e <main+0xa2>
+		_delay_ms (10);
+			if(get_parent() == 0)
+     262:	fd d3       	rcall	.+2042   	; 0xa5e <get_parent>
+     264:	88 23       	and	r24, r24
+     266:	11 f5       	brne	.+68     	; 0x2ac <main+0xf0>
+			{
+				res_xbee_func = get_config(DL,DH, &sleep_time);
+     268:	60 91 6c 00 	lds	r22, 0x006C
+     26c:	70 91 6d 00 	lds	r23, 0x006D
+     270:	80 91 6e 00 	lds	r24, 0x006E
+     274:	90 91 6f 00 	lds	r25, 0x006F
+     278:	20 91 68 00 	lds	r18, 0x0068
+     27c:	30 91 69 00 	lds	r19, 0x0069
+     280:	40 91 6a 00 	lds	r20, 0x006A
+     284:	50 91 6b 00 	lds	r21, 0x006B
+     288:	00 e6       	ldi	r16, 0x60	; 96
+     28a:	10 e0       	ldi	r17, 0x00	; 0
+     28c:	c8 d4       	rcall	.+2448   	; 0xc1e <get_config>
+				
+				if ( res_xbee_func == 1 ) // Ainda não tem configuração;
+     28e:	81 30       	cpi	r24, 0x01	; 1
+     290:	29 f4       	brne	.+10     	; 0x29c <main+0xe0>
+				{
+					sleep_time = SLEEP_TIME_DEF;
+     292:	d0 92 61 00 	sts	0x0061, r13
+     296:	c0 92 60 00 	sts	0x0060, r12
+     29a:	02 c0       	rjmp	.+4      	; 0x2a0 <main+0xe4>
+					normal_mode=1;
+				} 
+				else if (res_xbee_func == 0)
+     29c:	88 23       	and	r24, r24
+     29e:	31 f4       	brne	.+12     	; 0x2ac <main+0xf0>
+					normal_mode=1;
+     2a0:	81 e0       	ldi	r24, 0x01	; 1
+     2a2:	90 e0       	ldi	r25, 0x00	; 0
+     2a4:	90 93 67 00 	sts	0x0067, r25
+     2a8:	80 93 66 00 	sts	0x0066, r24
+			}
+		count_sleep=0;
+     2ac:	10 92 65 00 	sts	0x0065, r1
+     2b0:	10 92 64 00 	sts	0x0064, r1
+		TCNT2=0; // Reset Timer 2
+     2b4:	14 bc       	out	0x24, r1	; 36
+		while(ASSR & _BV(TCN2UB));
+     2b6:	02 b4       	in	r0, 0x22	; 34
+     2b8:	02 fc       	sbrc	r0, 2
+     2ba:	fd cf       	rjmp	.-6      	; 0x2b6 <main+0xfa>
+		bit_set(TIMSK,TOIE2); // Ativa interrupcao Timer2
+     2bc:	89 b7       	in	r24, 0x39	; 57
+     2be:	80 64       	ori	r24, 0x40	; 64
+     2c0:	89 bf       	out	0x39, r24	; 57
+		}
+	SLEEP_XBEE_ON; //
+     2c2:	a9 9a       	sbi	0x15, 1	; 21
+	sleepNow();	// uC dorme
+     2c4:	e4 de       	rcall	.-568    	; 0x8e <sleepNow>
+count_sleep=0;
+sei(); 				//enable_interrupts() <=> bit_set(SREG,7)
+
+while(1)
+{
+	while(normal_mode==0)
+     2c6:	80 91 66 00 	lds	r24, 0x0066
+     2ca:	90 91 67 00 	lds	r25, 0x0067
+     2ce:	89 2b       	or	r24, r25
+     2d0:	09 f4       	brne	.+2      	; 0x2d4 <main+0x118>
+     2d2:	b7 cf       	rjmp	.-146    	; 0x242 <main+0x86>
+     2d4:	77 c0       	rjmp	.+238    	; 0x3c4 <main+0x208>
+	sleepNow();	// uC dorme
+	}
+
+	while (normal_mode==1)
+	{
+		if(count_sleep >= sleep_time)
+     2d6:	20 91 64 00 	lds	r18, 0x0064
+     2da:	30 91 65 00 	lds	r19, 0x0065
+     2de:	80 91 60 00 	lds	r24, 0x0060
+     2e2:	90 91 61 00 	lds	r25, 0x0061
+     2e6:	28 17       	cp	r18, r24
+     2e8:	39 07       	cpc	r19, r25
+     2ea:	08 f4       	brcc	.+2      	; 0x2ee <main+0x132>
+     2ec:	69 c0       	rjmp	.+210    	; 0x3c0 <main+0x204>
+		{
+			bit_clear(TIMSK,TOIE2); // Disable interrupt timer 2
+     2ee:	89 b7       	in	r24, 0x39	; 57
+     2f0:	8f 7b       	andi	r24, 0xBF	; 191
+     2f2:	89 bf       	out	0x39, r24	; 57
+			V_AREF_ON;				// Ativa Vref ADC
+     2f4:	c0 9a       	sbi	0x18, 0	; 24
+			SOUND_SENSOR_ON;		// Liga o TSL2561 (Sensor de luz)
+     2f6:	97 9a       	sbi	0x12, 7	; 18
+			//Read Light Sensor
+			tsl2561_start();
+     2f8:	4d df       	rcall	.-358    	; 0x194 <tsl2561_start>
+			full_light_value = tsl2561_read_ch0(TSL_ADDRESS);
+     2fa:	82 e7       	ldi	r24, 0x72	; 114
+     2fc:	4f d6       	rcall	.+3230   	; 0xf9c <tsl2561_read_ch0>
+     2fe:	8c 01       	movw	r16, r24
+			ir_light_value = tsl2561_read_ch1(TSL_ADDRESS);
+     300:	82 e7       	ldi	r24, 0x72	; 114
+     302:	27 d6       	rcall	.+3150   	; 0xf52 <tsl2561_read_ch1>
+     304:	7c 01       	movw	r14, r24
+			lux_light_value = tsl2561_calc_lux(0, TSL_TINT, full_light_value, ir_light_value);
+     306:	80 e0       	ldi	r24, 0x00	; 0
+     308:	90 e0       	ldi	r25, 0x00	; 0
+     30a:	61 e0       	ldi	r22, 0x01	; 1
+     30c:	70 e0       	ldi	r23, 0x00	; 0
+     30e:	a8 01       	movw	r20, r16
+     310:	97 01       	movw	r18, r14
+     312:	2e d5       	rcall	.+2652   	; 0xd70 <tsl2561_calc_lux>
+	_delay_ms(200);
+}
+
+void tsl2561_end()
+{
+	TSL2561_POWER_DOWN;
+     314:	c2 98       	cbi	0x18, 2	; 24
+			tsl2561_start();
+			full_light_value = tsl2561_read_ch0(TSL_ADDRESS);
+			ir_light_value = tsl2561_read_ch1(TSL_ADDRESS);
+			lux_light_value = tsl2561_calc_lux(0, TSL_TINT, full_light_value, ir_light_value);
+			tsl2561_end();
+			visible_light_value = full_light_value - ir_light_value;
+     316:	0e 19       	sub	r16, r14
+     318:	1f 09       	sbc	r17, r15
+			data_tx[0]=1; // ID_Sensor Luz
+     31a:	79 82       	std	Y+1, r7	; 0x01
+			data_tx[1]=(uint8_t)(visible_light_value>>8);
+     31c:	1a 83       	std	Y+2, r17	; 0x02
+			data_tx[2]=(uint8_t)(visible_light_value);
+     31e:	0b 83       	std	Y+3, r16	; 0x03
+			data_tx[3]=(uint8_t)(ir_light_value>>8);
+     320:	fc 82       	std	Y+4, r15	; 0x04
+			data_tx[4]=(uint8_t)(ir_light_value);
+     322:	ed 82       	std	Y+5, r14	; 0x05
+			data_tx[5]=(uint8_t)(lux_light_value>>8);
+     324:	9e 83       	std	Y+6, r25	; 0x06
+			data_tx[6]=(uint8_t)(lux_light_value);
+     326:	8f 83       	std	Y+7, r24	; 0x07
+			//Read Sound Sensor
+			dba_sound_value=read_sound_preasure(5,8,3);
+     328:	85 e0       	ldi	r24, 0x05	; 5
+     32a:	68 e0       	ldi	r22, 0x08	; 8
+     32c:	43 e0       	ldi	r20, 0x03	; 3
+     32e:	da de       	rcall	.-588    	; 0xe4 <read_sound_preasure>
+			SLEEP_XBEE_OFF;			// Acorda modulo Xbee
+     330:	a9 98       	cbi	0x15, 1	; 21
+			SOUND_SENSOR_OFF;
+     332:	97 98       	cbi	0x12, 7	; 18
+			V_AREF_OFF;
+     334:	c0 98       	cbi	0x18, 0	; 24
+			data_tx[7] = 2;
+     336:	68 86       	std	Y+8, r6	; 0x08
+			data_tx[8]=(uint8_t)(dba_sound_value>>8);
+     338:	99 87       	std	Y+9, r25	; 0x09
+			data_tx[9]=(uint8_t)(dba_sound_value);
+     33a:	8a 87       	std	Y+10, r24	; 0x0a
+			res_xbee_func = TX_req_64bit(DL, DH, data_tx, SIZE_SENSORS_TX);
+     33c:	60 91 6c 00 	lds	r22, 0x006C
+     340:	70 91 6d 00 	lds	r23, 0x006D
+     344:	80 91 6e 00 	lds	r24, 0x006E
+     348:	90 91 6f 00 	lds	r25, 0x006F
+     34c:	20 91 68 00 	lds	r18, 0x0068
+     350:	30 91 69 00 	lds	r19, 0x0069
+     354:	40 91 6a 00 	lds	r20, 0x006A
+     358:	50 91 6b 00 	lds	r21, 0x006B
+     35c:	84 01       	movw	r16, r8
+     35e:	ea e0       	ldi	r30, 0x0A	; 10
+     360:	ee 2e       	mov	r14, r30
+     362:	d7 d3       	rcall	.+1966   	; 0xb12 <TX_req_64bit>
+			if (res_xbee_func == 1) //Enviar mensaegem de erro
+     364:	81 30       	cpi	r24, 0x01	; 1
+     366:	09 f4       	brne	.+2      	; 0x36a <main+0x1ae>
+				{CTS_XBEE_OFF;}
+     368:	95 9a       	sbi	0x12, 5	; 18
+			else if (res_xbee_func == 0xFF);
+				{CTS_XBEE_OFF}
+     36a:	95 9a       	sbi	0x12, 5	; 18
+			//RECEBER INFORMACAO DE NOVA CONFIGURACAO
+			res_xbee_func = ack_new_config(&sleep_time_aux);
+     36c:	8e eb       	ldi	r24, 0xBE	; 190
+     36e:	90 e0       	ldi	r25, 0x00	; 0
+     370:	71 d2       	rcall	.+1250   	; 0x854 <ack_new_config>
+			if(res_xbee_func==0)
+     372:	88 23       	and	r24, r24
+     374:	49 f4       	brne	.+18     	; 0x388 <main+0x1cc>
+				sleep_time=sleep_time_aux;
+     376:	80 91 be 00 	lds	r24, 0x00BE
+     37a:	90 91 bf 00 	lds	r25, 0x00BF
+     37e:	90 93 61 00 	sts	0x0061, r25
+     382:	80 93 60 00 	sts	0x0060, r24
+     386:	11 c0       	rjmp	.+34     	; 0x3aa <main+0x1ee>
+			if(res_xbee_func==1)
+     388:	81 30       	cpi	r24, 0x01	; 1
+     38a:	29 f4       	brne	.+10     	; 0x396 <main+0x1da>
+				sleep_time=SLEEP_TIME_DEF;
+     38c:	d0 92 61 00 	sts	0x0061, r13
+     390:	c0 92 60 00 	sts	0x0060, r12
+     394:	0a c0       	rjmp	.+20     	; 0x3aa <main+0x1ee>
+			if(res_xbee_func==0xFF)
+     396:	8f 3f       	cpi	r24, 0xFF	; 255
+     398:	41 f4       	brne	.+16     	; 0x3aa <main+0x1ee>
+				{sleep_time=SLEEP_TIME_DEF; normal_mode=0;}
+     39a:	d0 92 61 00 	sts	0x0061, r13
+     39e:	c0 92 60 00 	sts	0x0060, r12
+     3a2:	10 92 67 00 	sts	0x0067, r1
+     3a6:	10 92 66 00 	sts	0x0066, r1
+		count_sleep=0;
+     3aa:	10 92 65 00 	sts	0x0065, r1
+     3ae:	10 92 64 00 	sts	0x0064, r1
+		bit_set(TIMSK,TOIE2); // Ativa interrupcao Timer2
+     3b2:	89 b7       	in	r24, 0x39	; 57
+     3b4:	80 64       	ori	r24, 0x40	; 64
+     3b6:	89 bf       	out	0x39, r24	; 57
+		TCNT2=0; // Reset Timer 2
+     3b8:	14 bc       	out	0x24, r1	; 36
+		while(ASSR & _BV(TCN2UB));
+     3ba:	02 b4       	in	r0, 0x22	; 34
+     3bc:	02 fc       	sbrc	r0, 2
+     3be:	fd cf       	rjmp	.-6      	; 0x3ba <main+0x1fe>
+		}
+	SLEEP_XBEE_ON; 
+     3c0:	a9 9a       	sbi	0x15, 1	; 21
+	sleepNow();
+     3c2:	65 de       	rcall	.-822    	; 0x8e <sleepNow>
+		}
+	SLEEP_XBEE_ON; //
+	sleepNow();	// uC dorme
+	}
+
+	while (normal_mode==1)
+     3c4:	80 91 66 00 	lds	r24, 0x0066
+     3c8:	90 91 67 00 	lds	r25, 0x0067
+     3cc:	01 97       	sbiw	r24, 0x01	; 1
+     3ce:	09 f4       	brne	.+2      	; 0x3d2 <main+0x216>
+     3d0:	82 cf       	rjmp	.-252    	; 0x2d6 <main+0x11a>
+     3d2:	79 cf       	rjmp	.-270    	; 0x2c6 <main+0x10a>
+
+000003d4 <__vector_9>:
+
+uint8_t crush_uart_receive=0;
+volatile uint8_t timeout_timer0=0;
+
+ISR(TIMER0_OVF_vect)
+{
+     3d4:	1f 92       	push	r1
+     3d6:	0f 92       	push	r0
+     3d8:	0f b6       	in	r0, 0x3f	; 63
+     3da:	0f 92       	push	r0
+     3dc:	11 24       	eor	r1, r1
+     3de:	8f 93       	push	r24
+   //This is the interrupt service routine for TIMER0 OVERFLOW Interrupt.
+   //CPU automatically call this when TIMER0 overflows.
+
+   //Increment our variable
+   timeout_timer0++;
+     3e0:	80 91 71 00 	lds	r24, 0x0071
+     3e4:	8f 5f       	subi	r24, 0xFF	; 255
+     3e6:	80 93 71 00 	sts	0x0071, r24
+   if(timeout_timer0>30)
+     3ea:	80 91 71 00 	lds	r24, 0x0071
+     3ee:	8f 31       	cpi	r24, 0x1F	; 31
+     3f0:	10 f0       	brcs	.+4      	; 0x3f6 <__vector_9+0x22>
+   {
+      timeout_timer0=0;
+     3f2:	10 92 71 00 	sts	0x0071, r1
+   }
+//UART_Transmit(timeout_timer0);
+//UART_Transmit(timeout_timer0);
+}
+     3f6:	8f 91       	pop	r24
+     3f8:	0f 90       	pop	r0
+     3fa:	0f be       	out	0x3f, r0	; 63
+     3fc:	0f 90       	pop	r0
+     3fe:	1f 90       	pop	r1
+     400:	18 95       	reti
+
+00000402 <get_crush_uart_receive>:
+
+uint8_t get_crush_uart_receive()
+{
+uint8_t aux_crush=0;
+	aux_crush=crush_uart_receive;
+     402:	80 91 70 00 	lds	r24, 0x0070
+	crush_uart_receive=0;
+     406:	10 92 70 00 	sts	0x0070, r1
+return aux_crush;
+}
+     40a:	08 95       	ret
+
+0000040c <UART_Init>:
+
+void UART_Init(unsigned int baud)// Configura a porta série:ubrr=12-->9600,N,8,1
+{
+/* Coloca o Baud Rate */
+UBRRH = (unsigned char)(baud>>8);
+     40c:	90 bd       	out	0x20, r25	; 32
+UBRRL = (unsigned char) baud;
+     40e:	89 b9       	out	0x09, r24	; 9
+
+/* Habilita a Recepção e a Transmissão */
+UCSRB = (1<<RXEN)|(1<<TXEN);//|(1<<RXCIE);
+     410:	88 e1       	ldi	r24, 0x18	; 24
+     412:	8a b9       	out	0x0a, r24	; 10
+/* Define o formato: 8data, 1 bit stop */ 
+UCSRC = (1<<URSEL)|(0<<USBS)|(3<<UCSZ0);
+     414:	86 e8       	ldi	r24, 0x86	; 134
+     416:	80 bd       	out	0x20, r24	; 32
+}
+     418:	08 95       	ret
+
+0000041a <UART_Transmit>:
+
+void UART_Transmit(uint8_t data) // Envia pela porta série o valor contido em data
+{
+/* Wait for empty transmit buffer */
+while ( !( UCSRA & (1<<UDRE)) );
+     41a:	5d 9b       	sbis	0x0b, 5	; 11
+     41c:	fe cf       	rjmp	.-4      	; 0x41a <UART_Transmit>
+/* Put data into buffer, sends the data */
+UDR = data;
+     41e:	8c b9       	out	0x0c, r24	; 12
+
+while((UCSRA & (1<<TXC)) == 0); //Transmission complete 
+     420:	5e 9b       	sbis	0x0b, 6	; 11
+     422:	fe cf       	rjmp	.-4      	; 0x420 <UART_Transmit+0x6>
+UCSRA |= (1<<TXC);	
+     424:	5e 9a       	sbi	0x0b, 6	; 11
+
+}
+     426:	08 95       	ret
+
+00000428 <UART_Receive>:
+
+uint8_t UART_Receive(void) //Recebe um byte da porta série
+{
+	TCNT0 = 0x00;
+     428:	12 be       	out	0x32, r1	; 50
+	TIMSK|=(1<<TOIE0); // Enable Overflow Interrupt Enable
+     42a:	89 b7       	in	r24, 0x39	; 57
+     42c:	81 60       	ori	r24, 0x01	; 1
+     42e:	89 bf       	out	0x39, r24	; 57
+	timeout_timer0=0;
+     430:	10 92 71 00 	sts	0x0071, r1
+
+/* Wait for data to be received */
+while ( !(UCSRA & (1<<RXC)) && (timeout_timer0 < 30) );
+     434:	5f 99       	sbic	0x0b, 7	; 11
+     436:	04 c0       	rjmp	.+8      	; 0x440 <UART_Receive+0x18>
+     438:	80 91 71 00 	lds	r24, 0x0071
+     43c:	8e 31       	cpi	r24, 0x1E	; 30
+     43e:	d0 f3       	brcs	.-12     	; 0x434 <UART_Receive+0xc>
+/* Get and return received data from buffer */
+	if ( timeout_timer0>9 )
+     440:	80 91 71 00 	lds	r24, 0x0071
+     444:	8a 30       	cpi	r24, 0x0A	; 10
+     446:	28 f0       	brcs	.+10     	; 0x452 <UART_Receive+0x2a>
+		{
+			crush_uart_receive=1; 
+     448:	81 e0       	ldi	r24, 0x01	; 1
+     44a:	80 93 70 00 	sts	0x0070, r24
+     44e:	8f ef       	ldi	r24, 0xFF	; 255
+     450:	08 95       	ret
+			return 0xFF;
+		}
+	TIMSK|=(0<<TOIE0); // Disable Overflow Interrupt Enable
+     452:	89 b7       	in	r24, 0x39	; 57
+     454:	89 bf       	out	0x39, r24	; 57
+return UDR;
+     456:	8c b1       	in	r24, 0x0c	; 12
+}
+     458:	08 95       	ret
+
+0000045a <UART_Flush>:
+
+
+void UART_Flush(void)
+{
+     45a:	01 c0       	rjmp	.+2      	; 0x45e <UART_Flush+0x4>
+	unsigned char dummy;
+	while (UCSRA & (1<<RXC))
+		dummy = UDR;
+     45c:	8c b1       	in	r24, 0x0c	; 12
+
+
+void UART_Flush(void)
+{
+	unsigned char dummy;
+	while (UCSRA & (1<<RXC))
+     45e:	5f 99       	sbic	0x0b, 7	; 11
+     460:	fd cf       	rjmp	.-6      	; 0x45c <UART_Flush+0x2>
+		dummy = UDR;
+}
+     462:	08 95       	ret
+
+00000464 <UART_Transmit_32bit>:
+
+void UART_Transmit_32bit(uint32_t data)
+{
+     464:	9b 01       	movw	r18, r22
+     466:	ac 01       	movw	r20, r24
+	/* Wait for empty transmit buffer */
+	while ( !( UCSRA & (1<<UDRE)) );
+     468:	5d 9b       	sbis	0x0b, 5	; 11
+     46a:	fe cf       	rjmp	.-4      	; 0x468 <UART_Transmit_32bit+0x4>
+	/* Put MSB_high of data into buffer, sends the data */
+	UDR = (uint8_t)((data & 0xFF000000)>>24);
+     46c:	85 2f       	mov	r24, r21
+     46e:	99 27       	eor	r25, r25
+     470:	aa 27       	eor	r26, r26
+     472:	bb 27       	eor	r27, r27
+     474:	8c b9       	out	0x0c, r24	; 12
+
+	/* Wait for empty transmit buffer */
+	while ( !( UCSRA & (1<<UDRE)) );
+     476:	5d 9b       	sbis	0x0b, 5	; 11
+     478:	fe cf       	rjmp	.-4      	; 0x476 <UART_Transmit_32bit+0x12>
+	/* Put MSB_low of data into buffer, sends the data */
+	UDR = (uint8_t)((data & 0x00FF0000)>>16);
+     47a:	4c b9       	out	0x0c, r20	; 12
+
+	/* Wait for empty transmit buffer */
+	while ( !( UCSRA & (1<<UDRE)) );
+     47c:	5d 9b       	sbis	0x0b, 5	; 11
+     47e:	fe cf       	rjmp	.-4      	; 0x47c <UART_Transmit_32bit+0x18>
+	/* Put LSB_high of data into buffer, sends the data */
+	UDR = (uint8_t)((data & 0x0000FF00)>>8);
+     480:	3c b9       	out	0x0c, r19	; 12
+
+	/* Wait for empty transmit buffer */
+	while ( !( UCSRA & (1<<UDRE)) );
+     482:	5d 9b       	sbis	0x0b, 5	; 11
+     484:	fe cf       	rjmp	.-4      	; 0x482 <UART_Transmit_32bit+0x1e>
+	/* Put LSB_low of data into buffer, sends the data */
+	UDR = (uint8_t)((data & 0x000000FF));
+     486:	2c b9       	out	0x0c, r18	; 12
+	
+	/* Transmission complete */
+	while((UCSRA & (1<<TXC)) == 0);
+     488:	5e 9b       	sbis	0x0b, 6	; 11
+     48a:	fe cf       	rjmp	.-4      	; 0x488 <UART_Transmit_32bit+0x24>
+	UCSRA |= (1<<TXC);
+     48c:	5e 9a       	sbi	0x0b, 6	; 11
+}
+     48e:	08 95       	ret
+
+00000490 <UART_Transmit_16bit>:
+
+void UART_Transmit_16bit(uint16_t data)
+{
+	/* Wait for empty transmit buffer */
+	while ( !( UCSRA & (1<<UDRE)) );
+     490:	5d 9b       	sbis	0x0b, 5	; 11
+     492:	fe cf       	rjmp	.-4      	; 0x490 <UART_Transmit_16bit>
+	/* Put MSB of data into buffer, sends the data */
+	UDR = (uint8_t)((data & 0xFF00)>>8);
+     494:	9c b9       	out	0x0c, r25	; 12
+
+	/* Wait for empty transmit buffer */
+	while ( !( UCSRA & (1<<UDRE)) );
+     496:	5d 9b       	sbis	0x0b, 5	; 11
+     498:	fe cf       	rjmp	.-4      	; 0x496 <UART_Transmit_16bit+0x6>
+	/* Put LSB of data into buffer, sends the data */
+	UDR = (uint8_t)((data & 0x00FF));
+     49a:	8c b9       	out	0x0c, r24	; 12
+
+	/* Transmission complete */
+	while((UCSRA & (1<<TXC)) == 0);
+     49c:	5e 9b       	sbis	0x0b, 6	; 11
+     49e:	fe cf       	rjmp	.-4      	; 0x49c <UART_Transmit_16bit+0xc>
+	UCSRA |= (1<<TXC);
+     4a0:	5e 9a       	sbi	0x0b, 6	; 11
+}
+     4a2:	08 95       	ret
+
+000004a4 <sum_of_char>:
+  uint8_t checksum;
+  uint8_t AT_parameter;
+} API;
+
+uint16_t sum_of_char(char *data, uint8_t size)
+{
+     4a4:	fc 01       	movw	r30, r24
+     4a6:	20 e0       	ldi	r18, 0x00	; 0
+     4a8:	30 e0       	ldi	r19, 0x00	; 0
+     4aa:	90 e0       	ldi	r25, 0x00	; 0
+     4ac:	04 c0       	rjmp	.+8      	; 0x4b6 <sum_of_char+0x12>
+	uint16_t sum = 0;
+	for (uint8_t i=0; i < size; i++)
+		{
+			sum = sum + ((uint8_t)data[i]);
+     4ae:	81 91       	ld	r24, Z+
+     4b0:	28 0f       	add	r18, r24
+     4b2:	31 1d       	adc	r19, r1
+} API;
+
+uint16_t sum_of_char(char *data, uint8_t size)
+{
+	uint16_t sum = 0;
+	for (uint8_t i=0; i < size; i++)
+     4b4:	9f 5f       	subi	r25, 0xFF	; 255
+     4b6:	96 17       	cp	r25, r22
+     4b8:	d0 f3       	brcs	.-12     	; 0x4ae <sum_of_char+0xa>
+		{
+			sum = sum + ((uint8_t)data[i]);
+		}
+	return sum;
+}
+     4ba:	c9 01       	movw	r24, r18
+     4bc:	08 95       	ret
+
+000004be <sum_of_16bits>:
+
+uint16_t sum_of_16bits(uint16_t data)
+{
+  uint16_t sum=0;
+
+  sum = (uint8_t)((data & 0xFF00)>>8);
+     4be:	28 2f       	mov	r18, r24
+     4c0:	30 e0       	ldi	r19, 0x00	; 0
+     4c2:	29 0f       	add	r18, r25
+     4c4:	31 1d       	adc	r19, r1
+  sum += (uint8_t)((data & 0x00FF));
+return sum;
+}
+     4c6:	c9 01       	movw	r24, r18
+     4c8:	08 95       	ret
+
+000004ca <sum_of_32bits>:
+
+uint16_t sum_of_32bits(uint32_t data)
+{
+     4ca:	ef 92       	push	r14
+     4cc:	ff 92       	push	r15
+     4ce:	0f 93       	push	r16
+     4d0:	1f 93       	push	r17
+  uint16_t sum=0;
+
+  sum = (uint8_t)((data & 0xFF000000)>>24);
+     4d2:	e9 2e       	mov	r14, r25
+     4d4:	ff 24       	eor	r15, r15
+     4d6:	00 27       	eor	r16, r16
+     4d8:	11 27       	eor	r17, r17
+  sum += (uint8_t)((data & 0x00FF0000)>>16);
+     4da:	26 2f       	mov	r18, r22
+     4dc:	30 e0       	ldi	r19, 0x00	; 0
+     4de:	2e 0d       	add	r18, r14
+     4e0:	31 1d       	adc	r19, r1
+  sum += (uint8_t)((data & 0x0000FF00)>>8);
+     4e2:	28 0f       	add	r18, r24
+     4e4:	31 1d       	adc	r19, r1
+     4e6:	27 0f       	add	r18, r23
+     4e8:	31 1d       	adc	r19, r1
+  sum += (uint8_t)(data & 0x000000FF);
+return sum;
+}
+     4ea:	c9 01       	movw	r24, r18
+     4ec:	1f 91       	pop	r17
+     4ee:	0f 91       	pop	r16
+     4f0:	ff 90       	pop	r15
+     4f2:	ef 90       	pop	r14
+     4f4:	08 95       	ret
+
+000004f6 <RX_AT_cmd>:
+	UART_Transmit(API.AT_cmd[1]);        // Second char of AT command
+	return 0;
+}
+
+uint8_t RX_AT_cmd()
+{
+     4f6:	0f 93       	push	r16
+     4f8:	1f 93       	push	r17
+CTS_XBEE_ON;
+     4fa:	95 98       	cbi	0x12, 5	; 18
+	uint8_t frame_id, delimiter, frame_type;
+	
+	delimiter = UART_Receive();					// Start delimeter
+     4fc:	95 df       	rcall	.-214    	; 0x428 <UART_Receive>
+     4fe:	08 2f       	mov	r16, r24
+	if (get_crush_uart_receive() == 1) return 0xFF;
+     500:	80 df       	rcall	.-256    	; 0x402 <get_crush_uart_receive>
+     502:	81 30       	cpi	r24, 0x01	; 1
+     504:	09 f4       	brne	.+2      	; 0x508 <RX_AT_cmd+0x12>
+     506:	5b c0       	rjmp	.+182    	; 0x5be <RX_AT_cmd+0xc8>
+	if(delimiter !=  start_delimiter)           // Start condition check
+     508:	0e 37       	cpi	r16, 0x7E	; 126
+     50a:	11 f0       	breq	.+4      	; 0x510 <RX_AT_cmd+0x1a>
+	{
+		API_status = 0x05;						// Start frame error
+     50c:	85 e0       	ldi	r24, 0x05	; 5
+     50e:	3c c0       	rjmp	.+120    	; 0x588 <RX_AT_cmd+0x92>
+		return 1;								// ERROR
+	}
+	
+	API.length = UART_Receive();               	// Length
+     510:	8b df       	rcall	.-234    	; 0x428 <UART_Receive>
+     512:	80 93 b6 00 	sts	0x00B6, r24
+     516:	10 92 b7 00 	sts	0x00B7, r1
+	if (get_crush_uart_receive() == 1) return 0xFF;
+     51a:	73 df       	rcall	.-282    	; 0x402 <get_crush_uart_receive>
+     51c:	81 30       	cpi	r24, 0x01	; 1
+     51e:	09 f4       	brne	.+2      	; 0x522 <RX_AT_cmd+0x2c>
+     520:	4e c0       	rjmp	.+156    	; 0x5be <RX_AT_cmd+0xc8>
+	API.length = API.length<<8;
+     522:	10 91 b6 00 	lds	r17, 0x00B6
+     526:	00 e0       	ldi	r16, 0x00	; 0
+     528:	10 93 b7 00 	sts	0x00B7, r17
+     52c:	00 93 b6 00 	sts	0x00B6, r16
+	API.length = API.length | UART_Receive();
+     530:	7b df       	rcall	.-266    	; 0x428 <UART_Receive>
+     532:	90 e0       	ldi	r25, 0x00	; 0
+     534:	80 2b       	or	r24, r16
+     536:	91 2b       	or	r25, r17
+     538:	90 93 b7 00 	sts	0x00B7, r25
+     53c:	80 93 b6 00 	sts	0x00B6, r24
+	if (get_crush_uart_receive() == 1) return 0xFF;
+     540:	60 df       	rcall	.-320    	; 0x402 <get_crush_uart_receive>
+     542:	81 30       	cpi	r24, 0x01	; 1
+     544:	e1 f1       	breq	.+120    	; 0x5be <RX_AT_cmd+0xc8>
+	
+	frame_type=UART_Receive();
+     546:	70 df       	rcall	.-288    	; 0x428 <UART_Receive>
+     548:	08 2f       	mov	r16, r24
+	if (get_crush_uart_receive() == 1) return 0xFF;
+     54a:	5b df       	rcall	.-330    	; 0x402 <get_crush_uart_receive>
+     54c:	81 30       	cpi	r24, 0x01	; 1
+     54e:	b9 f1       	breq	.+110    	; 0x5be <RX_AT_cmd+0xc8>
+	if(frame_type == 0x8A)
+     550:	0a 38       	cpi	r16, 0x8A	; 138
+     552:	71 f4       	brne	.+28     	; 0x570 <RX_AT_cmd+0x7a>
+	{
+		_modem_status=UART_Receive();
+     554:	69 df       	rcall	.-302    	; 0x428 <UART_Receive>
+     556:	80 93 62 00 	sts	0x0062, r24
+		if (get_crush_uart_receive() == 1) return 0xFF;
+     55a:	53 df       	rcall	.-346    	; 0x402 <get_crush_uart_receive>
+     55c:	81 30       	cpi	r24, 0x01	; 1
+     55e:	79 f1       	breq	.+94     	; 0x5be <RX_AT_cmd+0xc8>
+		API.checksum = UART_Receive();      	// Checksum
+     560:	63 df       	rcall	.-314    	; 0x428 <UART_Receive>
+     562:	80 93 bc 00 	sts	0x00BC, r24
+		if (get_crush_uart_receive() == 1) return 0xFF;
+     566:	4d df       	rcall	.-358    	; 0x402 <get_crush_uart_receive>
+     568:	81 30       	cpi	r24, 0x01	; 1
+     56a:	49 f1       	breq	.+82     	; 0x5be <RX_AT_cmd+0xc8>
+     56c:	85 e0       	ldi	r24, 0x05	; 5
+     56e:	28 c0       	rjmp	.+80     	; 0x5c0 <RX_AT_cmd+0xca>
+		if((uint8_t)(API.checksum + frame_type + _modem_status == 0xFF));
+			return 5;
+	}
+	
+	API.frame_type = frame_type;          	// API identifier
+     570:	00 93 b9 00 	sts	0x00B9, r16
+	frame_id = UART_Receive();
+     574:	59 df       	rcall	.-334    	; 0x428 <UART_Receive>
+     576:	08 2f       	mov	r16, r24
+	if (get_crush_uart_receive() == 1) return 0xFF;
+     578:	44 df       	rcall	.-376    	; 0x402 <get_crush_uart_receive>
+     57a:	81 30       	cpi	r24, 0x01	; 1
+     57c:	01 f1       	breq	.+64     	; 0x5be <RX_AT_cmd+0xc8>
+	                 	// Frame ID
+	if(frame_id != API.frame_id)            	// Frame ID check
+     57e:	80 91 b8 00 	lds	r24, 0x00B8
+     582:	08 17       	cp	r16, r24
+     584:	29 f0       	breq	.+10     	; 0x590 <RX_AT_cmd+0x9a>
+	{ 
+		API_status = 0x02;                      // Frame ID error
+     586:	82 e0       	ldi	r24, 0x02	; 2
+     588:	80 93 b4 00 	sts	0x00B4, r24
+     58c:	81 e0       	ldi	r24, 0x01	; 1
+     58e:	18 c0       	rjmp	.+48     	; 0x5c0 <RX_AT_cmd+0xca>
+		return 1;								// ERROR
+	} 
+	API.frame_id = frame_id;
+     590:	00 93 b8 00 	sts	0x00B8, r16
+	API.AT_cmd[0] = UART_Receive();            	// if (get_crush_uart_receive() == 1) return 0xFF;
+     594:	49 df       	rcall	.-366    	; 0x428 <UART_Receive>
+     596:	80 93 ba 00 	sts	0x00BA, r24
+	if (get_crush_uart_receive() == 1) return 0xFF;
+     59a:	33 df       	rcall	.-410    	; 0x402 <get_crush_uart_receive>
+     59c:	81 30       	cpi	r24, 0x01	; 1
+     59e:	79 f0       	breq	.+30     	; 0x5be <RX_AT_cmd+0xc8>
+	API.AT_cmd[1] = UART_Receive();            	// AT2
+     5a0:	43 df       	rcall	.-378    	; 0x428 <UART_Receive>
+     5a2:	80 93 bb 00 	sts	0x00BB, r24
+	if (get_crush_uart_receive() == 1) return 0xFF;
+     5a6:	2d df       	rcall	.-422    	; 0x402 <get_crush_uart_receive>
+     5a8:	81 30       	cpi	r24, 0x01	; 1
+     5aa:	49 f0       	breq	.+18     	; 0x5be <RX_AT_cmd+0xc8>
+	cmd_status = UART_Receive();               	// Status
+     5ac:	3d df       	rcall	.-390    	; 0x428 <UART_Receive>
+     5ae:	80 93 b3 00 	sts	0x00B3, r24
+	if (get_crush_uart_receive() == 1) return 0xFF;
+     5b2:	27 df       	rcall	.-434    	; 0x402 <get_crush_uart_receive>
+     5b4:	81 30       	cpi	r24, 0x01	; 1
+     5b6:	19 f0       	breq	.+6      	; 0x5be <RX_AT_cmd+0xc8>
+	if (cmd_status==0)
+     5b8:	80 91 b3 00 	lds	r24, 0x00B3
+     5bc:	01 c0       	rjmp	.+2      	; 0x5c0 <RX_AT_cmd+0xca>
+     5be:	8f ef       	ldi	r24, 0xFF	; 255
+		return cmd_status;
+	else if (cmd_status!=0)
+		return cmd_status;
+return 1;
+}
+     5c0:	1f 91       	pop	r17
+     5c2:	0f 91       	pop	r16
+     5c4:	08 95       	ret
+
+000005c6 <RX_64bit>:
+
+return delivery_status;
+}
+
+uint8_t RX_64bit()
+{
+     5c6:	2f 92       	push	r2
+     5c8:	3f 92       	push	r3
+     5ca:	4f 92       	push	r4
+     5cc:	5f 92       	push	r5
+     5ce:	6f 92       	push	r6
+     5d0:	7f 92       	push	r7
+     5d2:	8f 92       	push	r8
+     5d4:	9f 92       	push	r9
+     5d6:	af 92       	push	r10
+     5d8:	bf 92       	push	r11
+     5da:	cf 92       	push	r12
+     5dc:	df 92       	push	r13
+     5de:	ef 92       	push	r14
+     5e0:	ff 92       	push	r15
+     5e2:	0f 93       	push	r16
+     5e4:	1f 93       	push	r17
+     5e6:	df 93       	push	r29
+     5e8:	cf 93       	push	r28
+     5ea:	00 d0       	rcall	.+0      	; 0x5ec <RX_64bit+0x26>
+     5ec:	00 d0       	rcall	.+0      	; 0x5ee <RX_64bit+0x28>
+     5ee:	0f 92       	push	r0
+     5f0:	cd b7       	in	r28, 0x3d	; 61
+     5f2:	de b7       	in	r29, 0x3e	; 62
+CTS_XBEE_ON;
+     5f4:	95 98       	cbi	0x12, 5	; 18
+	uint8_t delimiter, i=0;
+	uint8_t size_data_rx; //Tamanho dos dados a receber
+	uint16_t source_address;
+	uint32_t SH=0, SL=0;
+	
+	delimiter = UART_Receive();					// Start delimeter
+     5f6:	18 df       	rcall	.-464    	; 0x428 <UART_Receive>
+     5f8:	18 2f       	mov	r17, r24
+	if (get_crush_uart_receive() == 1) return 0xFF;
+     5fa:	03 df       	rcall	.-506    	; 0x402 <get_crush_uart_receive>
+     5fc:	81 30       	cpi	r24, 0x01	; 1
+     5fe:	09 f4       	brne	.+2      	; 0x602 <RX_64bit+0x3c>
+     600:	0e c1       	rjmp	.+540    	; 0x81e <RX_64bit+0x258>
+	if(delimiter != start_delimiter)                                	// Start condition check
+     602:	1e 37       	cpi	r17, 0x7E	; 126
+     604:	19 f0       	breq	.+6      	; 0x60c <RX_64bit+0x46>
+		API_status = 0x05;                              // Start frame error
+     606:	85 e0       	ldi	r24, 0x05	; 5
+     608:	80 93 b4 00 	sts	0x00B4, r24
+
+	API.length = UART_Receive();              			// Length (MSB)
+     60c:	0d df       	rcall	.-486    	; 0x428 <UART_Receive>
+     60e:	80 93 b6 00 	sts	0x00B6, r24
+     612:	10 92 b7 00 	sts	0x00B7, r1
+	if (get_crush_uart_receive() == 1) return 0xFF;
+     616:	f5 de       	rcall	.-534    	; 0x402 <get_crush_uart_receive>
+     618:	81 30       	cpi	r24, 0x01	; 1
+     61a:	09 f4       	brne	.+2      	; 0x61e <RX_64bit+0x58>
+     61c:	00 c1       	rjmp	.+512    	; 0x81e <RX_64bit+0x258>
+	API.length = API.length<<8;
+     61e:	1b 82       	std	Y+3, r1	; 0x03
+     620:	1a 82       	std	Y+2, r1	; 0x02
+     622:	20 91 b6 00 	lds	r18, 0x00B6
+     626:	2b 83       	std	Y+3, r18	; 0x03
+     628:	1a 82       	std	Y+2, r1	; 0x02
+     62a:	8a 81       	ldd	r24, Y+2	; 0x02
+     62c:	9b 81       	ldd	r25, Y+3	; 0x03
+     62e:	90 93 b7 00 	sts	0x00B7, r25
+     632:	80 93 b6 00 	sts	0x00B6, r24
+	API.length = API.length | UART_Receive(); 			// Length (LSB)
+     636:	f8 de       	rcall	.-528    	; 0x428 <UART_Receive>
+     638:	90 e0       	ldi	r25, 0x00	; 0
+     63a:	ea 81       	ldd	r30, Y+2	; 0x02
+     63c:	fb 81       	ldd	r31, Y+3	; 0x03
+     63e:	8e 2b       	or	r24, r30
+     640:	9f 2b       	or	r25, r31
+     642:	90 93 b7 00 	sts	0x00B7, r25
+     646:	80 93 b6 00 	sts	0x00B6, r24
+	if (get_crush_uart_receive() == 1) return 0xFF;
+     64a:	db de       	rcall	.-586    	; 0x402 <get_crush_uart_receive>
+     64c:	81 30       	cpi	r24, 0x01	; 1
+     64e:	09 f4       	brne	.+2      	; 0x652 <RX_64bit+0x8c>
+     650:	e6 c0       	rjmp	.+460    	; 0x81e <RX_64bit+0x258>
+	API.frame_type = UART_Receive();          			// Frame type
+     652:	ea de       	rcall	.-556    	; 0x428 <UART_Receive>
+     654:	80 93 b9 00 	sts	0x00B9, r24
+	if (get_crush_uart_receive() == 1) return 0xFF;
+     658:	d4 de       	rcall	.-600    	; 0x402 <get_crush_uart_receive>
+     65a:	81 30       	cpi	r24, 0x01	; 1
+     65c:	09 f4       	brne	.+2      	; 0x660 <RX_64bit+0x9a>
+     65e:	df c0       	rjmp	.+446    	; 0x81e <RX_64bit+0x258>
+	
+	SH = UART_Receive();								// Source address MSB byte 1
+     660:	e3 de       	rcall	.-570    	; 0x428 <UART_Receive>
+     662:	89 83       	std	Y+1, r24	; 0x01
+	if (get_crush_uart_receive() == 1) return 0xFF;
+     664:	ce de       	rcall	.-612    	; 0x402 <get_crush_uart_receive>
+     666:	81 30       	cpi	r24, 0x01	; 1
+     668:	09 f4       	brne	.+2      	; 0x66c <RX_64bit+0xa6>
+     66a:	d9 c0       	rjmp	.+434    	; 0x81e <RX_64bit+0x258>
+	SH = SH<<8;
+	SH = SH | UART_Receive();							// Source address MSB byte 2
+     66c:	dd de       	rcall	.-582    	; 0x428 <UART_Receive>
+     66e:	28 2e       	mov	r2, r24
+	if (get_crush_uart_receive() == 1) return 0xFF;
+     670:	c8 de       	rcall	.-624    	; 0x402 <get_crush_uart_receive>
+     672:	81 30       	cpi	r24, 0x01	; 1
+     674:	09 f4       	brne	.+2      	; 0x678 <RX_64bit+0xb2>
+     676:	d3 c0       	rjmp	.+422    	; 0x81e <RX_64bit+0x258>
+	SH = SH<<8;
+	SH = SH | UART_Receive();							// Source address MSB byte 3
+     678:	d7 de       	rcall	.-594    	; 0x428 <UART_Receive>
+     67a:	38 2e       	mov	r3, r24
+	if (get_crush_uart_receive() == 1) return 0xFF;
+     67c:	c2 de       	rcall	.-636    	; 0x402 <get_crush_uart_receive>
+     67e:	81 30       	cpi	r24, 0x01	; 1
+     680:	09 f4       	brne	.+2      	; 0x684 <RX_64bit+0xbe>
+     682:	cd c0       	rjmp	.+410    	; 0x81e <RX_64bit+0x258>
+	SH = SH<<8;
+	SH = SH | UART_Receive();							// Source address MSB byte 4
+     684:	d1 de       	rcall	.-606    	; 0x428 <UART_Receive>
+     686:	48 2e       	mov	r4, r24
+	if (get_crush_uart_receive() == 1) return 0xFF;
+     688:	bc de       	rcall	.-648    	; 0x402 <get_crush_uart_receive>
+     68a:	81 30       	cpi	r24, 0x01	; 1
+     68c:	09 f4       	brne	.+2      	; 0x690 <RX_64bit+0xca>
+     68e:	c7 c0       	rjmp	.+398    	; 0x81e <RX_64bit+0x258>
+	
+	SL = UART_Receive();								// Source address LSB byte 1
+     690:	cb de       	rcall	.-618    	; 0x428 <UART_Receive>
+     692:	58 2e       	mov	r5, r24
+	if (get_crush_uart_receive() == 1) return 0xFF;
+     694:	b6 de       	rcall	.-660    	; 0x402 <get_crush_uart_receive>
+     696:	81 30       	cpi	r24, 0x01	; 1
+     698:	09 f4       	brne	.+2      	; 0x69c <RX_64bit+0xd6>
+     69a:	c1 c0       	rjmp	.+386    	; 0x81e <RX_64bit+0x258>
+	SL = SL<<8;
+	SL = SL | UART_Receive();							// Source address LSB byte 2
+     69c:	c5 de       	rcall	.-630    	; 0x428 <UART_Receive>
+     69e:	68 2e       	mov	r6, r24
+	if (get_crush_uart_receive() == 1) return 0xFF;
+     6a0:	b0 de       	rcall	.-672    	; 0x402 <get_crush_uart_receive>
+     6a2:	81 30       	cpi	r24, 0x01	; 1
+     6a4:	09 f4       	brne	.+2      	; 0x6a8 <RX_64bit+0xe2>
+     6a6:	bb c0       	rjmp	.+374    	; 0x81e <RX_64bit+0x258>
+	SL = SL<<8;
+	SL = SL | UART_Receive();							// Source address LSB byte 3
+     6a8:	bf de       	rcall	.-642    	; 0x428 <UART_Receive>
+     6aa:	78 2e       	mov	r7, r24
+	if (get_crush_uart_receive() == 1) return 0xFF;
+     6ac:	aa de       	rcall	.-684    	; 0x402 <get_crush_uart_receive>
+     6ae:	81 30       	cpi	r24, 0x01	; 1
+     6b0:	09 f4       	brne	.+2      	; 0x6b4 <RX_64bit+0xee>
+     6b2:	b5 c0       	rjmp	.+362    	; 0x81e <RX_64bit+0x258>
+	SL = SL<<8;
+	SL = SL | UART_Receive();							// Source address LSB byte 4
+     6b4:	b9 de       	rcall	.-654    	; 0x428 <UART_Receive>
+     6b6:	88 2e       	mov	r8, r24
+	if (get_crush_uart_receive() == 1) return 0xFF;
+     6b8:	a4 de       	rcall	.-696    	; 0x402 <get_crush_uart_receive>
+     6ba:	81 30       	cpi	r24, 0x01	; 1
+     6bc:	09 f4       	brne	.+2      	; 0x6c0 <RX_64bit+0xfa>
+     6be:	af c0       	rjmp	.+350    	; 0x81e <RX_64bit+0x258>
+	                		
+	
+	source_address = UART_Receive();
+     6c0:	b3 de       	rcall	.-666    	; 0x428 <UART_Receive>
+     6c2:	98 2e       	mov	r9, r24
+	if (get_crush_uart_receive() == 1) return 0xFF;
+     6c4:	9e de       	rcall	.-708    	; 0x402 <get_crush_uart_receive>
+     6c6:	81 30       	cpi	r24, 0x01	; 1
+     6c8:	09 f4       	brne	.+2      	; 0x6cc <RX_64bit+0x106>
+     6ca:	a9 c0       	rjmp	.+338    	; 0x81e <RX_64bit+0x258>
+	source_address = (source_address << 8) | UART_Receive();
+     6cc:	ad de       	rcall	.-678    	; 0x428 <UART_Receive>
+     6ce:	f8 2e       	mov	r15, r24
+	if (get_crush_uart_receive() == 1) return 0xFF;
+     6d0:	98 de       	rcall	.-720    	; 0x402 <get_crush_uart_receive>
+     6d2:	81 30       	cpi	r24, 0x01	; 1
+     6d4:	09 f4       	brne	.+2      	; 0x6d8 <RX_64bit+0x112>
+     6d6:	a3 c0       	rjmp	.+326    	; 0x81e <RX_64bit+0x258>
+	
+	receive_options = UART_Receive();                 // Receive options
+     6d8:	a7 de       	rcall	.-690    	; 0x428 <UART_Receive>
+     6da:	80 93 b2 00 	sts	0x00B2, r24
+	if (get_crush_uart_receive() == 1) return 0xFF;
+     6de:	91 de       	rcall	.-734    	; 0x402 <get_crush_uart_receive>
+     6e0:	81 30       	cpi	r24, 0x01	; 1
+     6e2:	09 f4       	brne	.+2      	; 0x6e6 <RX_64bit+0x120>
+     6e4:	9c c0       	rjmp	.+312    	; 0x81e <RX_64bit+0x258>
+
+	size_data_rx=API.length-12;				//Received data
+     6e6:	e0 90 b6 00 	lds	r14, 0x00B6
+     6ea:	f4 ef       	ldi	r31, 0xF4	; 244
+     6ec:	ef 0e       	add	r14, r31
+     6ee:	92 e7       	ldi	r25, 0x72	; 114
+     6f0:	c9 2e       	mov	r12, r25
+     6f2:	90 e0       	ldi	r25, 0x00	; 0
+     6f4:	d9 2e       	mov	r13, r25
+     6f6:	10 e0       	ldi	r17, 0x00	; 0
+     6f8:	09 c0       	rjmp	.+18     	; 0x70c <RX_64bit+0x146>
+	for(i=0;i<size_data_rx;i++)
+	{
+		_data_rx[i]=UART_Receive();
+     6fa:	96 de       	rcall	.-724    	; 0x428 <UART_Receive>
+     6fc:	f6 01       	movw	r30, r12
+     6fe:	81 93       	st	Z+, r24
+     700:	6f 01       	movw	r12, r30
+		if (get_crush_uart_receive() == 1) return 0xFF;
+     702:	7f de       	rcall	.-770    	; 0x402 <get_crush_uart_receive>
+     704:	81 30       	cpi	r24, 0x01	; 1
+     706:	09 f4       	brne	.+2      	; 0x70a <RX_64bit+0x144>
+     708:	8a c0       	rjmp	.+276    	; 0x81e <RX_64bit+0x258>
+	
+	receive_options = UART_Receive();                 // Receive options
+	if (get_crush_uart_receive() == 1) return 0xFF;
+
+	size_data_rx=API.length-12;				//Received data
+	for(i=0;i<size_data_rx;i++)
+     70a:	1f 5f       	subi	r17, 0xFF	; 255
+     70c:	1e 15       	cp	r17, r14
+     70e:	a8 f3       	brcs	.-22     	; 0x6fa <RX_64bit+0x134>
+		_data_rx[i]=UART_Receive();
+		if (get_crush_uart_receive() == 1) return 0xFF;
+	}
+   
+
+	API.checksum = UART_Receive();            // Checksum
+     710:	8b de       	rcall	.-746    	; 0x428 <UART_Receive>
+     712:	80 93 bc 00 	sts	0x00BC, r24
+	if (get_crush_uart_receive() == 1) return 0xFF;
+     716:	75 de       	rcall	.-790    	; 0x402 <get_crush_uart_receive>
+     718:	81 30       	cpi	r24, 0x01	; 1
+     71a:	09 f4       	brne	.+2      	; 0x71e <RX_64bit+0x158>
+     71c:	80 c0       	rjmp	.+256    	; 0x81e <RX_64bit+0x258>
+
+	// Checksum verification
+	if( (uint8_t)(API.checksum + API.frame_type + sum_of_32bits(SH) + sum_of_32bits(SL) + sum_of_16bits(source_address) + receive_options + sum_of_char(_data_rx, size_data_rx)) == 0xFF)
+     71e:	a0 90 bc 00 	lds	r10, 0x00BC
+     722:	00 91 b9 00 	lds	r16, 0x00B9
+     726:	b0 90 b2 00 	lds	r11, 0x00B2
+     72a:	e2 e7       	ldi	r30, 0x72	; 114
+     72c:	f0 e0       	ldi	r31, 0x00	; 0
+     72e:	90 e0       	ldi	r25, 0x00	; 0
+     730:	cc 24       	eor	r12, r12
+     732:	dd 24       	eor	r13, r13
+     734:	04 c0       	rjmp	.+8      	; 0x73e <RX_64bit+0x178>
+uint16_t sum_of_char(char *data, uint8_t size)
+{
+	uint16_t sum = 0;
+	for (uint8_t i=0; i < size; i++)
+		{
+			sum = sum + ((uint8_t)data[i]);
+     736:	81 91       	ld	r24, Z+
+     738:	c8 0e       	add	r12, r24
+     73a:	d1 1c       	adc	r13, r1
+} API;
+
+uint16_t sum_of_char(char *data, uint8_t size)
+{
+	uint16_t sum = 0;
+	for (uint8_t i=0; i < size; i++)
+     73c:	9f 5f       	subi	r25, 0xFF	; 255
+     73e:	9e 15       	cp	r25, r14
+     740:	d0 f3       	brcs	.-12     	; 0x736 <RX_64bit+0x170>
+	if (get_crush_uart_receive() == 1) return 0xFF;
+	                		
+	
+	source_address = UART_Receive();
+	if (get_crush_uart_receive() == 1) return 0xFF;
+	source_address = (source_address << 8) | UART_Receive();
+     742:	99 2d       	mov	r25, r9
+     744:	80 e0       	ldi	r24, 0x00	; 0
+     746:	2f 2d       	mov	r18, r15
+     748:	30 e0       	ldi	r19, 0x00	; 0
+     74a:	28 2b       	or	r18, r24
+     74c:	39 2b       	or	r19, r25
+     74e:	3d 83       	std	Y+5, r19	; 0x05
+     750:	2c 83       	std	Y+4, r18	; 0x04
+	API.length = API.length | UART_Receive(); 			// Length (LSB)
+	if (get_crush_uart_receive() == 1) return 0xFF;
+	API.frame_type = UART_Receive();          			// Frame type
+	if (get_crush_uart_receive() == 1) return 0xFF;
+	
+	SH = UART_Receive();								// Source address MSB byte 1
+     752:	89 81       	ldd	r24, Y+1	; 0x01
+     754:	28 2f       	mov	r18, r24
+     756:	30 e0       	ldi	r19, 0x00	; 0
+     758:	40 e0       	ldi	r20, 0x00	; 0
+     75a:	50 e0       	ldi	r21, 0x00	; 0
+	if (get_crush_uart_receive() == 1) return 0xFF;
+	SH = SH<<8;
+     75c:	54 2f       	mov	r21, r20
+     75e:	43 2f       	mov	r20, r19
+     760:	32 2f       	mov	r19, r18
+     762:	22 27       	eor	r18, r18
+	SH = SH | UART_Receive();							// Source address MSB byte 2
+     764:	82 2d       	mov	r24, r2
+     766:	90 e0       	ldi	r25, 0x00	; 0
+     768:	a0 e0       	ldi	r26, 0x00	; 0
+     76a:	b0 e0       	ldi	r27, 0x00	; 0
+     76c:	82 2b       	or	r24, r18
+     76e:	93 2b       	or	r25, r19
+     770:	a4 2b       	or	r26, r20
+     772:	b5 2b       	or	r27, r21
+	if (get_crush_uart_receive() == 1) return 0xFF;
+	SH = SH<<8;
+     774:	ba 2f       	mov	r27, r26
+     776:	a9 2f       	mov	r26, r25
+     778:	98 2f       	mov	r25, r24
+     77a:	88 27       	eor	r24, r24
+	SH = SH | UART_Receive();							// Source address MSB byte 3
+     77c:	23 2d       	mov	r18, r3
+     77e:	30 e0       	ldi	r19, 0x00	; 0
+     780:	40 e0       	ldi	r20, 0x00	; 0
+     782:	50 e0       	ldi	r21, 0x00	; 0
+     784:	28 2b       	or	r18, r24
+     786:	39 2b       	or	r19, r25
+     788:	4a 2b       	or	r20, r26
+     78a:	5b 2b       	or	r21, r27
+	if (get_crush_uart_receive() == 1) return 0xFF;
+	SH = SH<<8;
+     78c:	54 2f       	mov	r21, r20
+     78e:	43 2f       	mov	r20, r19
+     790:	32 2f       	mov	r19, r18
+     792:	22 27       	eor	r18, r18
+
+	API.checksum = UART_Receive();            // Checksum
+	if (get_crush_uart_receive() == 1) return 0xFF;
+
+	// Checksum verification
+	if( (uint8_t)(API.checksum + API.frame_type + sum_of_32bits(SH) + sum_of_32bits(SL) + sum_of_16bits(source_address) + receive_options + sum_of_char(_data_rx, size_data_rx)) == 0xFF)
+     794:	64 2d       	mov	r22, r4
+     796:	70 e0       	ldi	r23, 0x00	; 0
+     798:	80 e0       	ldi	r24, 0x00	; 0
+     79a:	90 e0       	ldi	r25, 0x00	; 0
+     79c:	62 2b       	or	r22, r18
+     79e:	73 2b       	or	r23, r19
+     7a0:	84 2b       	or	r24, r20
+     7a2:	95 2b       	or	r25, r21
+     7a4:	92 de       	rcall	.-732    	; 0x4ca <sum_of_32bits>
+     7a6:	f8 2e       	mov	r15, r24
+	if (get_crush_uart_receive() == 1) return 0xFF;
+	SH = SH<<8;
+	SH = SH | UART_Receive();							// Source address MSB byte 4
+	if (get_crush_uart_receive() == 1) return 0xFF;
+	
+	SL = UART_Receive();								// Source address LSB byte 1
+     7a8:	25 2d       	mov	r18, r5
+     7aa:	30 e0       	ldi	r19, 0x00	; 0
+     7ac:	40 e0       	ldi	r20, 0x00	; 0
+     7ae:	50 e0       	ldi	r21, 0x00	; 0
+	if (get_crush_uart_receive() == 1) return 0xFF;
+	SL = SL<<8;
+     7b0:	54 2f       	mov	r21, r20
+     7b2:	43 2f       	mov	r20, r19
+     7b4:	32 2f       	mov	r19, r18
+     7b6:	22 27       	eor	r18, r18
+	SL = SL | UART_Receive();							// Source address LSB byte 2
+     7b8:	86 2d       	mov	r24, r6
+     7ba:	90 e0       	ldi	r25, 0x00	; 0
+     7bc:	a0 e0       	ldi	r26, 0x00	; 0
+     7be:	b0 e0       	ldi	r27, 0x00	; 0
+     7c0:	82 2b       	or	r24, r18
+     7c2:	93 2b       	or	r25, r19
+     7c4:	a4 2b       	or	r26, r20
+     7c6:	b5 2b       	or	r27, r21
+	if (get_crush_uart_receive() == 1) return 0xFF;
+	SL = SL<<8;
+     7c8:	ba 2f       	mov	r27, r26
+     7ca:	a9 2f       	mov	r26, r25
+     7cc:	98 2f       	mov	r25, r24
+     7ce:	88 27       	eor	r24, r24
+	SL = SL | UART_Receive();							// Source address LSB byte 3
+     7d0:	27 2d       	mov	r18, r7
+     7d2:	30 e0       	ldi	r19, 0x00	; 0
+     7d4:	40 e0       	ldi	r20, 0x00	; 0
+     7d6:	50 e0       	ldi	r21, 0x00	; 0
+     7d8:	28 2b       	or	r18, r24
+     7da:	39 2b       	or	r19, r25
+     7dc:	4a 2b       	or	r20, r26
+     7de:	5b 2b       	or	r21, r27
+	if (get_crush_uart_receive() == 1) return 0xFF;
+	SL = SL<<8;
+     7e0:	54 2f       	mov	r21, r20
+     7e2:	43 2f       	mov	r20, r19
+     7e4:	32 2f       	mov	r19, r18
+     7e6:	22 27       	eor	r18, r18
+
+	API.checksum = UART_Receive();            // Checksum
+	if (get_crush_uart_receive() == 1) return 0xFF;
+
+	// Checksum verification
+	if( (uint8_t)(API.checksum + API.frame_type + sum_of_32bits(SH) + sum_of_32bits(SL) + sum_of_16bits(source_address) + receive_options + sum_of_char(_data_rx, size_data_rx)) == 0xFF)
+     7e8:	68 2d       	mov	r22, r8
+     7ea:	70 e0       	ldi	r23, 0x00	; 0
+     7ec:	80 e0       	ldi	r24, 0x00	; 0
+     7ee:	90 e0       	ldi	r25, 0x00	; 0
+     7f0:	62 2b       	or	r22, r18
+     7f2:	73 2b       	or	r23, r19
+     7f4:	84 2b       	or	r24, r20
+     7f6:	95 2b       	or	r25, r21
+     7f8:	68 de       	rcall	.-816    	; 0x4ca <sum_of_32bits>
+     7fa:	0a 0d       	add	r16, r10
+     7fc:	0b 0d       	add	r16, r11
+     7fe:	0f 0d       	add	r16, r15
+     800:	08 0f       	add	r16, r24
+     802:	9d 81       	ldd	r25, Y+5	; 0x05
+     804:	09 0f       	add	r16, r25
+     806:	ec 81       	ldd	r30, Y+4	; 0x04
+     808:	0e 0f       	add	r16, r30
+     80a:	0c 0d       	add	r16, r12
+     80c:	0f 3f       	cpi	r16, 0xFF	; 255
+     80e:	19 f4       	brne	.+6      	; 0x816 <RX_64bit+0x250>
+	{
+		API_status = 0x00;	// Checksum OK
+     810:	10 92 b4 00 	sts	0x00B4, r1
+     814:	06 c0       	rjmp	.+12     	; 0x822 <RX_64bit+0x25c>
+	}
+	else
+	{
+		API_status = 0x03; // Bad CRC
+     816:	83 e0       	ldi	r24, 0x03	; 3
+     818:	80 93 b4 00 	sts	0x00B4, r24
+     81c:	02 c0       	rjmp	.+4      	; 0x822 <RX_64bit+0x25c>
+     81e:	ee 24       	eor	r14, r14
+     820:	ea 94       	dec	r14
+	}
+return size_data_rx;
+}
+     822:	8e 2d       	mov	r24, r14
+     824:	0f 90       	pop	r0
+     826:	0f 90       	pop	r0
+     828:	0f 90       	pop	r0
+     82a:	0f 90       	pop	r0
+     82c:	0f 90       	pop	r0
+     82e:	cf 91       	pop	r28
+     830:	df 91       	pop	r29
+     832:	1f 91       	pop	r17
+     834:	0f 91       	pop	r16
+     836:	ff 90       	pop	r15
+     838:	ef 90       	pop	r14
+     83a:	df 90       	pop	r13
+     83c:	cf 90       	pop	r12
+     83e:	bf 90       	pop	r11
+     840:	af 90       	pop	r10
+     842:	9f 90       	pop	r9
+     844:	8f 90       	pop	r8
+     846:	7f 90       	pop	r7
+     848:	6f 90       	pop	r6
+     84a:	5f 90       	pop	r5
+     84c:	4f 90       	pop	r4
+     84e:	3f 90       	pop	r3
+     850:	2f 90       	pop	r2
+     852:	08 95       	ret
+
+00000854 <ack_new_config>:
+		return 0;
+	else return 1;
+}
+
+uint8_t ack_new_config(uint16_t *sleep_time_aux)
+{
+     854:	cf 93       	push	r28
+     856:	df 93       	push	r29
+     858:	ec 01       	movw	r28, r24
+CTS_XBEE_ON;
+     85a:	95 98       	cbi	0x12, 5	; 18
+	uint8_t size_data_rx;
+	size_data_rx = RX_64bit();
+     85c:	b4 de       	rcall	.-664    	; 0x5c6 <RX_64bit>
+	if ( size_data_rx == 0xFF)
+     85e:	8f 3f       	cpi	r24, 0xFF	; 255
+     860:	19 f4       	brne	.+6      	; 0x868 <ack_new_config+0x14>
+		{CTS_XBEE_OFF; return 0xFF; }
+     862:	95 9a       	sbi	0x12, 5	; 18
+     864:	2f ef       	ldi	r18, 0xFF	; 255
+     866:	1a c0       	rjmp	.+52     	; 0x89c <ack_new_config+0x48>
+CTS_XBEE_OFF;
+     868:	95 9a       	sbi	0x12, 5	; 18
+	if (size_data_rx !=0 )
+     86a:	88 23       	and	r24, r24
+     86c:	b1 f0       	breq	.+44     	; 0x89a <ack_new_config+0x46>
+	{
+		if(_data_rx[0] == 104) return 2;
+     86e:	80 91 72 00 	lds	r24, 0x0072
+     872:	88 36       	cpi	r24, 0x68	; 104
+     874:	11 f4       	brne	.+4      	; 0x87a <ack_new_config+0x26>
+     876:	22 e0       	ldi	r18, 0x02	; 2
+     878:	11 c0       	rjmp	.+34     	; 0x89c <ack_new_config+0x48>
+		if(_data_rx[0] == 103)
+     87a:	87 36       	cpi	r24, 0x67	; 103
+     87c:	71 f4       	brne	.+28     	; 0x89a <ack_new_config+0x46>
+		{
+			*sleep_time_aux=_data_rx[1]; //ATENCAO - só recebe o tempo q dorme, 1byte
+			*sleep_time_aux=(*sleep_time_aux<<8);
+     87e:	30 91 73 00 	lds	r19, 0x0073
+     882:	20 e0       	ldi	r18, 0x00	; 0
+     884:	39 83       	std	Y+1, r19	; 0x01
+     886:	28 83       	st	Y, r18
+			*sleep_time_aux=((*sleep_time_aux)|(_data_rx[2]));
+     888:	80 91 74 00 	lds	r24, 0x0074
+     88c:	90 e0       	ldi	r25, 0x00	; 0
+     88e:	82 2b       	or	r24, r18
+     890:	93 2b       	or	r25, r19
+     892:	99 83       	std	Y+1, r25	; 0x01
+     894:	88 83       	st	Y, r24
+     896:	89 2b       	or	r24, r25
+     898:	09 f4       	brne	.+2      	; 0x89c <ack_new_config+0x48>
+     89a:	21 e0       	ldi	r18, 0x01	; 1
+				return 1;
+		return 0;
+		}
+	}
+return 1;	
+}
+     89c:	82 2f       	mov	r24, r18
+     89e:	df 91       	pop	r29
+     8a0:	cf 91       	pop	r28
+     8a2:	08 95       	ret
+
+000008a4 <TX_status>:
+
+return 1; // ATENCAO: Dizer que foi mal transmitida significa desconeccao
+}
+
+uint8_t TX_status()
+{
+     8a4:	ef 92       	push	r14
+     8a6:	ff 92       	push	r15
+     8a8:	0f 93       	push	r16
+     8aa:	1f 93       	push	r17
+CTS_XBEE_ON;
+     8ac:	95 98       	cbi	0x12, 5	; 18
+	uint8_t frame_type, frame_id, delimiter, tx_retry_count, discovery_status;
+	uint16_t dest_address;
+	
+	delimiter = UART_Receive();                             	// Start Delimiter
+     8ae:	bc dd       	rcall	.-1160   	; 0x428 <UART_Receive>
+     8b0:	08 2f       	mov	r16, r24
+	if (get_crush_uart_receive() == 1) return 0xFF;
+     8b2:	a7 dd       	rcall	.-1202   	; 0x402 <get_crush_uart_receive>
+     8b4:	81 30       	cpi	r24, 0x01	; 1
+     8b6:	09 f4       	brne	.+2      	; 0x8ba <TX_status+0x16>
+     8b8:	93 c0       	rjmp	.+294    	; 0x9e0 <TX_status+0x13c>
+	if(delimiter != start_delimiter)                           	
+     8ba:	0e 37       	cpi	r16, 0x7E	; 126
+     8bc:	11 f0       	breq	.+4      	; 0x8c2 <TX_status+0x1e>
+	{
+		API_status = 0x05;
+     8be:	85 e0       	ldi	r24, 0x05	; 5
+     8c0:	41 c0       	rjmp	.+130    	; 0x944 <TX_status+0xa0>
+		return 0xFE;
+	}
+	
+	API.length = UART_Receive();             		    		// Length
+     8c2:	b2 dd       	rcall	.-1180   	; 0x428 <UART_Receive>
+     8c4:	80 93 b6 00 	sts	0x00B6, r24
+     8c8:	10 92 b7 00 	sts	0x00B7, r1
+	if (get_crush_uart_receive() == 1) return 0xFF;
+     8cc:	9a dd       	rcall	.-1228   	; 0x402 <get_crush_uart_receive>
+     8ce:	81 30       	cpi	r24, 0x01	; 1
+     8d0:	09 f4       	brne	.+2      	; 0x8d4 <TX_status+0x30>
+     8d2:	86 c0       	rjmp	.+268    	; 0x9e0 <TX_status+0x13c>
+	API.length = API.length<<8;
+     8d4:	10 91 b6 00 	lds	r17, 0x00B6
+     8d8:	00 e0       	ldi	r16, 0x00	; 0
+     8da:	10 93 b7 00 	sts	0x00B7, r17
+     8de:	00 93 b6 00 	sts	0x00B6, r16
+	API.length = API.length | UART_Receive();
+     8e2:	a2 dd       	rcall	.-1212   	; 0x428 <UART_Receive>
+     8e4:	90 e0       	ldi	r25, 0x00	; 0
+     8e6:	80 2b       	or	r24, r16
+     8e8:	91 2b       	or	r25, r17
+     8ea:	90 93 b7 00 	sts	0x00B7, r25
+     8ee:	80 93 b6 00 	sts	0x00B6, r24
+	if (get_crush_uart_receive() == 1) return 0xFF;
+     8f2:	87 dd       	rcall	.-1266   	; 0x402 <get_crush_uart_receive>
+     8f4:	81 30       	cpi	r24, 0x01	; 1
+     8f6:	09 f4       	brne	.+2      	; 0x8fa <TX_status+0x56>
+     8f8:	73 c0       	rjmp	.+230    	; 0x9e0 <TX_status+0x13c>
+	frame_type = UART_Receive();
+     8fa:	96 dd       	rcall	.-1236   	; 0x428 <UART_Receive>
+     8fc:	08 2f       	mov	r16, r24
+	if (get_crush_uart_receive() == 1) return 0xFF;
+     8fe:	81 dd       	rcall	.-1278   	; 0x402 <get_crush_uart_receive>
+     900:	81 30       	cpi	r24, 0x01	; 1
+     902:	09 f4       	brne	.+2      	; 0x906 <TX_status+0x62>
+     904:	6d c0       	rjmp	.+218    	; 0x9e0 <TX_status+0x13c>
+
+	
+	if(frame_type == 0x8A)
+     906:	0a 38       	cpi	r16, 0x8A	; 138
+     908:	81 f4       	brne	.+32     	; 0x92a <TX_status+0x86>
+	{
+		_modem_status=UART_Receive();
+     90a:	8e dd       	rcall	.-1252   	; 0x428 <UART_Receive>
+     90c:	80 93 62 00 	sts	0x0062, r24
+		if (get_crush_uart_receive() == 1) return 0xFF;
+     910:	78 dd       	rcall	.-1296   	; 0x402 <get_crush_uart_receive>
+     912:	81 30       	cpi	r24, 0x01	; 1
+     914:	09 f4       	brne	.+2      	; 0x918 <TX_status+0x74>
+     916:	64 c0       	rjmp	.+200    	; 0x9e0 <TX_status+0x13c>
+		API.checksum = UART_Receive();      	// Checksum
+     918:	87 dd       	rcall	.-1266   	; 0x428 <UART_Receive>
+     91a:	80 93 bc 00 	sts	0x00BC, r24
+		if (get_crush_uart_receive() == 1) return 0xFF;
+     91e:	71 dd       	rcall	.-1310   	; 0x402 <get_crush_uart_receive>
+     920:	81 30       	cpi	r24, 0x01	; 1
+     922:	09 f4       	brne	.+2      	; 0x926 <TX_status+0x82>
+     924:	5d c0       	rjmp	.+186    	; 0x9e0 <TX_status+0x13c>
+     926:	45 e0       	ldi	r20, 0x05	; 5
+     928:	5c c0       	rjmp	.+184    	; 0x9e2 <TX_status+0x13e>
+		if((uint8_t)(API.checksum + frame_type + _modem_status == 0xFF));
+			return 5;
+	}
+	
+	
+	API.frame_type = frame_type;          	// API identifier
+     92a:	00 93 b9 00 	sts	0x00B9, r16
+
+	frame_id = UART_Receive();                              	// Frame ID
+     92e:	7c dd       	rcall	.-1288   	; 0x428 <UART_Receive>
+     930:	08 2f       	mov	r16, r24
+	if (get_crush_uart_receive() == 1) return 0xFF;
+     932:	67 dd       	rcall	.-1330   	; 0x402 <get_crush_uart_receive>
+     934:	81 30       	cpi	r24, 0x01	; 1
+     936:	09 f4       	brne	.+2      	; 0x93a <TX_status+0x96>
+     938:	53 c0       	rjmp	.+166    	; 0x9e0 <TX_status+0x13c>
+	if(frame_id != API.frame_id)                               	
+     93a:	80 91 b8 00 	lds	r24, 0x00B8
+     93e:	08 17       	cp	r16, r24
+     940:	21 f0       	breq	.+8      	; 0x94a <TX_status+0xa6>
+	{
+		API_status = 0x02;                              	    
+     942:	82 e0       	ldi	r24, 0x02	; 2
+     944:	80 93 b4 00 	sts	0x00B4, r24
+     948:	1f c0       	rjmp	.+62     	; 0x988 <TX_status+0xe4>
+		return 0xFE;
+	}
+	API.frame_id = frame_id;
+     94a:	00 93 b8 00 	sts	0x00B8, r16
+	
+	dest_address = UART_Receive();								// 16-bit address of destination
+     94e:	6c dd       	rcall	.-1320   	; 0x428 <UART_Receive>
+     950:	f8 2e       	mov	r15, r24
+	if (get_crush_uart_receive() == 1) return 0xFF;
+     952:	57 dd       	rcall	.-1362   	; 0x402 <get_crush_uart_receive>
+     954:	81 30       	cpi	r24, 0x01	; 1
+     956:	09 f4       	brne	.+2      	; 0x95a <TX_status+0xb6>
+     958:	43 c0       	rjmp	.+134    	; 0x9e0 <TX_status+0x13c>
+	dest_address = dest_address<<8;
+	dest_address = dest_address | UART_Receive();
+     95a:	66 dd       	rcall	.-1332   	; 0x428 <UART_Receive>
+     95c:	18 2f       	mov	r17, r24
+	if (get_crush_uart_receive() == 1) return 0xFF;
+     95e:	51 dd       	rcall	.-1374   	; 0x402 <get_crush_uart_receive>
+     960:	81 30       	cpi	r24, 0x01	; 1
+     962:	f1 f1       	breq	.+124    	; 0x9e0 <TX_status+0x13c>
+	//FALTA VERIFICAR 16bit-address - caso igual ao endereço da rede foi entregue se sucesso, caso igual ao endereço de desitno --> sem sucesso
+	
+	tx_retry_count = UART_Receive();							// TX Retry Count
+     964:	61 dd       	rcall	.-1342   	; 0x428 <UART_Receive>
+     966:	e8 2e       	mov	r14, r24
+	if (get_crush_uart_receive() == 1) return 0xFF;
+     968:	4c dd       	rcall	.-1384   	; 0x402 <get_crush_uart_receive>
+     96a:	81 30       	cpi	r24, 0x01	; 1
+     96c:	c9 f1       	breq	.+114    	; 0x9e0 <TX_status+0x13c>
+	
+	delivery_status = UART_Receive();                           // Delivery status
+     96e:	5c dd       	rcall	.-1352   	; 0x428 <UART_Receive>
+     970:	80 93 b5 00 	sts	0x00B5, r24
+	if (get_crush_uart_receive() == 1) return 0xFF;
+     974:	46 dd       	rcall	.-1396   	; 0x402 <get_crush_uart_receive>
+     976:	81 30       	cpi	r24, 0x01	; 1
+     978:	99 f1       	breq	.+102    	; 0x9e0 <TX_status+0x13c>
+	
+	if(delivery_status > 0x75)
+     97a:	80 91 b5 00 	lds	r24, 0x00B5
+     97e:	86 37       	cpi	r24, 0x76	; 118
+     980:	28 f0       	brcs	.+10     	; 0x98c <TX_status+0xe8>
+	{
+		delivery_status = 0xFE;                         	
+     982:	8e ef       	ldi	r24, 0xFE	; 254
+     984:	80 93 b5 00 	sts	0x00B5, r24
+     988:	4e ef       	ldi	r20, 0xFE	; 254
+     98a:	2b c0       	rjmp	.+86     	; 0x9e2 <TX_status+0x13e>
+		return 0xFE;                                          	
+	}
+
+	discovery_status = UART_Receive();
+     98c:	4d dd       	rcall	.-1382   	; 0x428 <UART_Receive>
+     98e:	08 2f       	mov	r16, r24
+	if (get_crush_uart_receive() == 1) return 0xFF;
+     990:	38 dd       	rcall	.-1424   	; 0x402 <get_crush_uart_receive>
+     992:	81 30       	cpi	r24, 0x01	; 1
+     994:	29 f1       	breq	.+74     	; 0x9e0 <TX_status+0x13c>
+	
+	API.checksum = UART_Receive();                         		// Checksum
+     996:	48 dd       	rcall	.-1392   	; 0x428 <UART_Receive>
+     998:	80 93 bc 00 	sts	0x00BC, r24
+	if (get_crush_uart_receive() == 1) return 0xFF;
+     99c:	32 dd       	rcall	.-1436   	; 0x402 <get_crush_uart_receive>
+     99e:	81 30       	cpi	r24, 0x01	; 1
+     9a0:	f9 f0       	breq	.+62     	; 0x9e0 <TX_status+0x13c>
+	}
+	API.frame_id = frame_id;
+	
+	dest_address = UART_Receive();								// 16-bit address of destination
+	if (get_crush_uart_receive() == 1) return 0xFF;
+	dest_address = dest_address<<8;
+     9a2:	9f 2d       	mov	r25, r15
+     9a4:	80 e0       	ldi	r24, 0x00	; 0
+	dest_address = dest_address | UART_Receive();
+     9a6:	21 2f       	mov	r18, r17
+     9a8:	30 e0       	ldi	r19, 0x00	; 0
+     9aa:	28 2b       	or	r18, r24
+     9ac:	39 2b       	or	r19, r25
+	discovery_status = UART_Receive();
+	if (get_crush_uart_receive() == 1) return 0xFF;
+	
+	API.checksum = UART_Receive();                         		// Checksum
+	if (get_crush_uart_receive() == 1) return 0xFF;
+	if( (uint8_t)(API.checksum + API.frame_type + API.frame_id + sum_of_16bits(dest_address) + tx_retry_count + delivery_status + discovery_status) == 0xFF )
+     9ae:	40 91 b5 00 	lds	r20, 0x00B5
+     9b2:	80 91 b9 00 	lds	r24, 0x00B9
+     9b6:	90 91 bc 00 	lds	r25, 0x00BC
+     9ba:	89 0f       	add	r24, r25
+     9bc:	90 91 b8 00 	lds	r25, 0x00B8
+     9c0:	89 0f       	add	r24, r25
+     9c2:	84 0f       	add	r24, r20
+     9c4:	83 0f       	add	r24, r19
+     9c6:	82 0f       	add	r24, r18
+     9c8:	8e 0d       	add	r24, r14
+     9ca:	80 0f       	add	r24, r16
+     9cc:	8f 3f       	cpi	r24, 0xFF	; 255
+     9ce:	19 f4       	brne	.+6      	; 0x9d6 <TX_status+0x132>
+	{
+		API_status = 0x00;
+     9d0:	10 92 b4 00 	sts	0x00B4, r1
+     9d4:	06 c0       	rjmp	.+12     	; 0x9e2 <TX_status+0x13e>
+	}
+	else
+	{
+		API_status = 0x03; // CRC error
+     9d6:	83 e0       	ldi	r24, 0x03	; 3
+     9d8:	80 93 b4 00 	sts	0x00B4, r24
+     9dc:	40 2f       	mov	r20, r16
+     9de:	01 c0       	rjmp	.+2      	; 0x9e2 <TX_status+0x13e>
+		return discovery_status;
+     9e0:	4f ef       	ldi	r20, 0xFF	; 255
+	}
+
+return delivery_status;
+}
+     9e2:	84 2f       	mov	r24, r20
+     9e4:	1f 91       	pop	r17
+     9e6:	0f 91       	pop	r16
+     9e8:	ff 90       	pop	r15
+     9ea:	ef 90       	pop	r14
+     9ec:	08 95       	ret
+
+000009ee <CRC_AT_calc>:
+return sum;
+}
+
+void CRC_AT_calc()
+{
+	API.checksum = (0xFF - (uint8_t)(API.frame_type + API.frame_id + API.AT_cmd[0] + API.AT_cmd[1] + API.AT_parameter));
+     9ee:	80 91 b8 00 	lds	r24, 0x00B8
+     9f2:	90 91 b9 00 	lds	r25, 0x00B9
+     9f6:	89 0f       	add	r24, r25
+     9f8:	90 91 ba 00 	lds	r25, 0x00BA
+     9fc:	89 0f       	add	r24, r25
+     9fe:	90 91 bb 00 	lds	r25, 0x00BB
+     a02:	89 0f       	add	r24, r25
+     a04:	90 91 bd 00 	lds	r25, 0x00BD
+     a08:	89 0f       	add	r24, r25
+     a0a:	80 95       	com	r24
+     a0c:	80 93 bc 00 	sts	0x00BC, r24
+	UART_Transmit(API.checksum); // Sends CRC to module
+     a10:	04 dd       	rcall	.-1528   	; 0x41a <UART_Transmit>
+}
+     a12:	08 95       	ret
+
+00000a14 <TX_AT_cmd>:
+	}
+return size_data_rx;
+}
+
+uint8_t TX_AT_cmd(uint16_t length)
+{
+     a14:	cf 93       	push	r28
+     a16:	df 93       	push	r29
+     a18:	ec 01       	movw	r28, r24
+CTS_XBEE_OFF;
+     a1a:	95 9a       	sbi	0x12, 5	; 18
+	API.frame_id = API.frame_id+1;
+     a1c:	80 91 b8 00 	lds	r24, 0x00B8
+     a20:	8f 5f       	subi	r24, 0xFF	; 255
+     a22:	80 93 b8 00 	sts	0x00B8, r24
+	if(API.frame_id == 0)                // Frame_ID = 0 -> No response
+     a26:	88 23       	and	r24, r24
+     a28:	19 f4       	brne	.+6      	; 0xa30 <TX_AT_cmd+0x1c>
+		API.frame_id = 1;
+     a2a:	81 e0       	ldi	r24, 0x01	; 1
+     a2c:	80 93 b8 00 	sts	0x00B8, r24
+	API.frame_type = 0x08;               // 0x08->AT Command
+     a30:	88 e0       	ldi	r24, 0x08	; 8
+     a32:	80 93 b9 00 	sts	0x00B9, r24
+		
+	UART_Transmit(start_delimiter);		// Start delimiter
+     a36:	8e e7       	ldi	r24, 0x7E	; 126
+     a38:	f0 dc       	rcall	.-1568   	; 0x41a <UART_Transmit>
+	UART_Transmit_16bit(length);         // Length
+     a3a:	ce 01       	movw	r24, r28
+     a3c:	29 dd       	rcall	.-1454   	; 0x490 <UART_Transmit_16bit>
+	UART_Transmit(API.frame_type);       // API.frame_type->AT Command
+     a3e:	80 91 b9 00 	lds	r24, 0x00B9
+     a42:	eb dc       	rcall	.-1578   	; 0x41a <UART_Transmit>
+	UART_Transmit(API.frame_id);         // Frame ID (for ack)
+     a44:	80 91 b8 00 	lds	r24, 0x00B8
+     a48:	e8 dc       	rcall	.-1584   	; 0x41a <UART_Transmit>
+	UART_Transmit(API.AT_cmd[0]);        // First char of AT command
+     a4a:	80 91 ba 00 	lds	r24, 0x00BA
+     a4e:	e5 dc       	rcall	.-1590   	; 0x41a <UART_Transmit>
+	UART_Transmit(API.AT_cmd[1]);        // Second char of AT command
+     a50:	80 91 bb 00 	lds	r24, 0x00BB
+     a54:	e2 dc       	rcall	.-1596   	; 0x41a <UART_Transmit>
+	return 0;
+}
+     a56:	80 e0       	ldi	r24, 0x00	; 0
+     a58:	df 91       	pop	r29
+     a5a:	cf 91       	pop	r28
+     a5c:	08 95       	ret
+
+00000a5e <get_parent>:
+		return cmd_status;
+return 1;
+}
+
+uint8_t get_parent()
+{
+     a5e:	0f 93       	push	r16
+     a60:	1f 93       	push	r17
+	uint8_t aux=0xFF;
+	uint16_t cmd_data;
+	API.AT_cmd[0]='M';
+     a62:	8d e4       	ldi	r24, 0x4D	; 77
+     a64:	80 93 ba 00 	sts	0x00BA, r24
+	API.AT_cmd[1]='P';//'MP' --> 16bit Parent Network Address;
+     a68:	80 e5       	ldi	r24, 0x50	; 80
+     a6a:	80 93 bb 00 	sts	0x00BB, r24
+	TX_AT_cmd(4);
+     a6e:	84 e0       	ldi	r24, 0x04	; 4
+     a70:	90 e0       	ldi	r25, 0x00	; 0
+     a72:	d0 df       	rcall	.-96     	; 0xa14 <TX_AT_cmd>
+	API.AT_parameter=0;
+     a74:	10 92 bd 00 	sts	0x00BD, r1
+	CRC_AT_calc();
+     a78:	ba df       	rcall	.-140    	; 0x9ee <CRC_AT_calc>
+		{
+		return 1;
+		}
+	while (aux==5)
+	{
+		aux = RX_AT_cmd();
+     a7a:	3d dd       	rcall	.-1414   	; 0x4f6 <RX_AT_cmd>
+     a7c:	98 2f       	mov	r25, r24
+		if ((aux > 0) && (aux < 5))
+     a7e:	81 50       	subi	r24, 0x01	; 1
+     a80:	84 30       	cpi	r24, 0x04	; 4
+     a82:	08 f4       	brcc	.+2      	; 0xa86 <get_parent+0x28>
+     a84:	42 c0       	rjmp	.+132    	; 0xb0a <get_parent+0xac>
+	
+	if ((aux > 0) && (aux < 5))
+		{
+		return 1;
+		}
+	while (aux==5)
+     a86:	95 30       	cpi	r25, 0x05	; 5
+     a88:	c1 f3       	breq	.-16     	; 0xa7a <get_parent+0x1c>
+		aux = RX_AT_cmd();
+		if ((aux > 0) && (aux < 5))
+			return 1;
+	}
+	
+	if ( aux == 0xFF)
+     a8a:	9f 3f       	cpi	r25, 0xFF	; 255
+     a8c:	81 f0       	breq	.+32     	; 0xaae <get_parent+0x50>
+		{CTS_XBEE_OFF; return 0xFF;}
+
+	//Receives the parameter
+	cmd_data = UART_Receive();
+     a8e:	cc dc       	rcall	.-1640   	; 0x428 <UART_Receive>
+     a90:	08 2f       	mov	r16, r24
+	if (get_crush_uart_receive() == 1) {CTS_XBEE_OFF; return 0xFF;};
+     a92:	b7 dc       	rcall	.-1682   	; 0x402 <get_crush_uart_receive>
+     a94:	81 30       	cpi	r24, 0x01	; 1
+     a96:	59 f0       	breq	.+22     	; 0xaae <get_parent+0x50>
+	cmd_data = (cmd_data << 8) | UART_Receive();
+     a98:	c7 dc       	rcall	.-1650   	; 0x428 <UART_Receive>
+     a9a:	18 2f       	mov	r17, r24
+	if (get_crush_uart_receive() == 1) {CTS_XBEE_OFF; return 0xFF;};
+     a9c:	b2 dc       	rcall	.-1692   	; 0x402 <get_crush_uart_receive>
+     a9e:	81 30       	cpi	r24, 0x01	; 1
+     aa0:	31 f0       	breq	.+12     	; 0xaae <get_parent+0x50>
+	
+	API.checksum = UART_Receive();                        		// Checksum
+     aa2:	c2 dc       	rcall	.-1660   	; 0x428 <UART_Receive>
+     aa4:	80 93 bc 00 	sts	0x00BC, r24
+	if (get_crush_uart_receive() == 1) {CTS_XBEE_OFF; return 0xFF;};
+     aa8:	ac dc       	rcall	.-1704   	; 0x402 <get_crush_uart_receive>
+     aaa:	81 30       	cpi	r24, 0x01	; 1
+     aac:	19 f4       	brne	.+6      	; 0xab4 <get_parent+0x56>
+     aae:	95 9a       	sbi	0x12, 5	; 18
+     ab0:	8f ef       	ldi	r24, 0xFF	; 255
+     ab2:	2c c0       	rjmp	.+88     	; 0xb0c <get_parent+0xae>
+		{CTS_XBEE_OFF; return 0xFF;}
+
+	//Receives the parameter
+	cmd_data = UART_Receive();
+	if (get_crush_uart_receive() == 1) {CTS_XBEE_OFF; return 0xFF;};
+	cmd_data = (cmd_data << 8) | UART_Receive();
+     ab4:	90 2f       	mov	r25, r16
+     ab6:	80 e0       	ldi	r24, 0x00	; 0
+     ab8:	41 2f       	mov	r20, r17
+     aba:	50 e0       	ldi	r21, 0x00	; 0
+     abc:	48 2b       	or	r20, r24
+     abe:	59 2b       	or	r21, r25
+	if (get_crush_uart_receive() == 1) {CTS_XBEE_OFF; return 0xFF;};
+	
+	API.checksum = UART_Receive();                        		// Checksum
+	if (get_crush_uart_receive() == 1) {CTS_XBEE_OFF; return 0xFF;};
+CTS_XBEE_OFF;
+     ac0:	95 9a       	sbi	0x12, 5	; 18
+	if((uint8_t)(API.checksum + API.frame_type + API.frame_id + API.AT_cmd[0] + API.AT_cmd[1] + cmd_status + sum_of_16bits(cmd_data) == 0xFF))
+     ac2:	20 91 b9 00 	lds	r18, 0x00B9
+     ac6:	80 91 bc 00 	lds	r24, 0x00BC
+     aca:	90 e0       	ldi	r25, 0x00	; 0
+     acc:	82 0f       	add	r24, r18
+     ace:	91 1d       	adc	r25, r1
+     ad0:	20 91 b8 00 	lds	r18, 0x00B8
+     ad4:	82 0f       	add	r24, r18
+     ad6:	91 1d       	adc	r25, r1
+     ad8:	20 91 ba 00 	lds	r18, 0x00BA
+     adc:	82 0f       	add	r24, r18
+     ade:	91 1d       	adc	r25, r1
+     ae0:	20 91 bb 00 	lds	r18, 0x00BB
+     ae4:	82 0f       	add	r24, r18
+     ae6:	91 1d       	adc	r25, r1
+     ae8:	20 91 b3 00 	lds	r18, 0x00B3
+     aec:	82 0f       	add	r24, r18
+     aee:	91 1d       	adc	r25, r1
+     af0:	84 0f       	add	r24, r20
+     af2:	91 1d       	adc	r25, r1
+     af4:	85 0f       	add	r24, r21
+     af6:	91 1d       	adc	r25, r1
+     af8:	8f 3f       	cpi	r24, 0xFF	; 255
+     afa:	91 05       	cpc	r25, r1
+     afc:	11 f4       	brne	.+4      	; 0xb02 <get_parent+0xa4>
+	{
+		API_status = 0x00; 
+     afe:	10 92 b4 00 	sts	0x00B4, r1
+     b02:	80 e0       	ldi	r24, 0x00	; 0
+     b04:	4e 5f       	subi	r20, 0xFE	; 254
+     b06:	5f 4f       	sbci	r21, 0xFF	; 255
+     b08:	09 f4       	brne	.+2      	; 0xb0c <get_parent+0xae>
+     b0a:	81 e0       	ldi	r24, 0x01	; 1
+	}
+	if (cmd_data!=0xFFFE)
+		return 0;
+	else return 1;
+}
+     b0c:	1f 91       	pop	r17
+     b0e:	0f 91       	pop	r16
+     b10:	08 95       	ret
+
+00000b12 <TX_req_64bit>:
+{
+	API.checksum = (0xFF - (uint8_t)(API.frame_type + API.frame_id + API.AT_cmd[0] + API.AT_cmd[1] + API.AT_parameter));
+	UART_Transmit(API.checksum); // Sends CRC to module
+}
+uint8_t TX_req_64bit(uint32_t DL, uint32_t DH, uint8_t *data, uint8_t size) // return 0 if TX was well transmited; return 1 if not; return 2 if don't receive data from uart
+{
+     b12:	4f 92       	push	r4
+     b14:	5f 92       	push	r5
+     b16:	6f 92       	push	r6
+     b18:	7f 92       	push	r7
+     b1a:	8f 92       	push	r8
+     b1c:	9f 92       	push	r9
+     b1e:	af 92       	push	r10
+     b20:	bf 92       	push	r11
+     b22:	cf 92       	push	r12
+     b24:	df 92       	push	r13
+     b26:	ef 92       	push	r14
+     b28:	ff 92       	push	r15
+     b2a:	0f 93       	push	r16
+     b2c:	1f 93       	push	r17
+     b2e:	cf 93       	push	r28
+     b30:	df 93       	push	r29
+     b32:	3b 01       	movw	r6, r22
+     b34:	4c 01       	movw	r8, r24
+     b36:	59 01       	movw	r10, r18
+     b38:	6a 01       	movw	r12, r20
+     b3a:	f0 2e       	mov	r15, r16
+     b3c:	0e 2d       	mov	r16, r14
+CTS_XBEE_OFF;
+     b3e:	95 9a       	sbi	0x12, 5	; 18
+	API.frame_type=0x10; 
+     b40:	80 e1       	ldi	r24, 0x10	; 16
+     b42:	80 93 b9 00 	sts	0x00B9, r24
+	uint8_t tx_options=0, i, aux;				// 1 --> Disable ACK after TX
+	uint16_t dest_address=0xFFFE;
+	uint8_t broad_radius=0;
+	
+	API.frame_id++;
+     b46:	80 91 b8 00 	lds	r24, 0x00B8
+     b4a:	8f 5f       	subi	r24, 0xFF	; 255
+     b4c:	80 93 b8 00 	sts	0x00B8, r24
+	if(API.frame_id == 0)                   // Frame_ID = 0 -> No response
+     b50:	88 23       	and	r24, r24
+     b52:	19 f4       	brne	.+6      	; 0xb5a <TX_req_64bit+0x48>
+		API.frame_id = 1;
+     b54:	81 e0       	ldi	r24, 0x01	; 1
+     b56:	80 93 b8 00 	sts	0x00B8, r24
+
+	UART_Transmit(start_delimiter);		// Start delimiter    
+     b5a:	8e e7       	ldi	r24, 0x7E	; 126
+     b5c:	5e dc       	rcall	.-1860   	; 0x41a <UART_Transmit>
+	UART_Transmit_16bit(14+size);			// Length with 8 bytes of data (change this for other type of payload)
+     b5e:	80 2f       	mov	r24, r16
+     b60:	90 e0       	ldi	r25, 0x00	; 0
+     b62:	0e 96       	adiw	r24, 0x0e	; 14
+     b64:	95 dc       	rcall	.-1750   	; 0x490 <UART_Transmit_16bit>
+	UART_Transmit(API.frame_type);			// TX Request
+     b66:	80 91 b9 00 	lds	r24, 0x00B9
+     b6a:	57 dc       	rcall	.-1874   	; 0x41a <UART_Transmit>
+	UART_Transmit(API.frame_id);			// Frame ID (for ACK)
+     b6c:	80 91 b8 00 	lds	r24, 0x00B8
+     b70:	54 dc       	rcall	.-1880   	; 0x41a <UART_Transmit>
+	UART_Transmit_32bit(DH);			// Serial Number High (MSB Destination Adress)
+     b72:	c6 01       	movw	r24, r12
+     b74:	b5 01       	movw	r22, r10
+     b76:	76 dc       	rcall	.-1812   	; 0x464 <UART_Transmit_32bit>
+	UART_Transmit_32bit(DL);			// Serial Number Low (LSB Destination Adress)
+     b78:	c4 01       	movw	r24, r8
+     b7a:	b3 01       	movw	r22, r6
+     b7c:	73 dc       	rcall	.-1818   	; 0x464 <UART_Transmit_32bit>
+	UART_Transmit_16bit(dest_address);	// 16-bit destination network adress if known. 
+     b7e:	8e ef       	ldi	r24, 0xFE	; 254
+     b80:	9f ef       	ldi	r25, 0xFF	; 255
+     b82:	86 dc       	rcall	.-1780   	; 0x490 <UART_Transmit_16bit>
+										// Set to 0xFFFE if the address is unknown, or if sending a broadcast.
+	UART_Transmit(broad_radius); 				// Broadcast radius. Sets maximum number of hops a broadcast transmission can take.
+     b84:	80 e0       	ldi	r24, 0x00	; 0
+     b86:	49 dc       	rcall	.-1902   	; 0x41a <UART_Transmit>
+										// If set to 0, the broadcast radius will be set to the maximum hops value.
+	UART_Transmit(tx_options);
+     b88:	80 e0       	ldi	r24, 0x00	; 0
+     b8a:	47 dc       	rcall	.-1906   	; 0x41a <UART_Transmit>
+     b8c:	2f 2d       	mov	r18, r15
+     b8e:	31 2f       	mov	r19, r17
+     b90:	c9 01       	movw	r24, r18
+     b92:	7c 01       	movw	r14, r24
+     b94:	ec 01       	movw	r28, r24
+     b96:	10 e0       	ldi	r17, 0x00	; 0
+     b98:	03 c0       	rjmp	.+6      	; 0xba0 <TX_req_64bit+0x8e>
+	
+	
+	for (i=0;i<size;i++)
+	{
+		UART_Transmit((uint8_t)data[i]);
+     b9a:	89 91       	ld	r24, Y+
+     b9c:	3e dc       	rcall	.-1924   	; 0x41a <UART_Transmit>
+	UART_Transmit(broad_radius); 				// Broadcast radius. Sets maximum number of hops a broadcast transmission can take.
+										// If set to 0, the broadcast radius will be set to the maximum hops value.
+	UART_Transmit(tx_options);
+	
+	
+	for (i=0;i<size;i++)
+     b9e:	1f 5f       	subi	r17, 0xFF	; 255
+     ba0:	10 17       	cp	r17, r16
+     ba2:	d8 f3       	brcs	.-10     	; 0xb9a <TX_req_64bit+0x88>
+	{
+		UART_Transmit((uint8_t)data[i]);
+	}
+
+
+	API.checksum = (0xFF - (uint8_t)(API.frame_type + API.frame_id + sum_of_32bits(DH) + sum_of_32bits(DL) + sum_of_16bits(dest_address) + broad_radius + tx_options + sum_of_char(data, size)) ) ;
+     ba4:	40 90 b9 00 	lds	r4, 0x00B9
+     ba8:	50 90 b8 00 	lds	r5, 0x00B8
+     bac:	90 e0       	ldi	r25, 0x00	; 0
+     bae:	c0 e0       	ldi	r28, 0x00	; 0
+     bb0:	d0 e0       	ldi	r29, 0x00	; 0
+     bb2:	06 c0       	rjmp	.+12     	; 0xbc0 <TX_req_64bit+0xae>
+uint16_t sum_of_char(char *data, uint8_t size)
+{
+	uint16_t sum = 0;
+	for (uint8_t i=0; i < size; i++)
+		{
+			sum = sum + ((uint8_t)data[i]);
+     bb4:	f7 01       	movw	r30, r14
+     bb6:	81 91       	ld	r24, Z+
+     bb8:	7f 01       	movw	r14, r30
+     bba:	c8 0f       	add	r28, r24
+     bbc:	d1 1d       	adc	r29, r1
+} API;
+
+uint16_t sum_of_char(char *data, uint8_t size)
+{
+	uint16_t sum = 0;
+	for (uint8_t i=0; i < size; i++)
+     bbe:	9f 5f       	subi	r25, 0xFF	; 255
+     bc0:	90 17       	cp	r25, r16
+     bc2:	c0 f3       	brcs	.-16     	; 0xbb4 <TX_req_64bit+0xa2>
+	{
+		UART_Transmit((uint8_t)data[i]);
+	}
+
+
+	API.checksum = (0xFF - (uint8_t)(API.frame_type + API.frame_id + sum_of_32bits(DH) + sum_of_32bits(DL) + sum_of_16bits(dest_address) + broad_radius + tx_options + sum_of_char(data, size)) ) ;
+     bc4:	c6 01       	movw	r24, r12
+     bc6:	b5 01       	movw	r22, r10
+     bc8:	80 dc       	rcall	.-1792   	; 0x4ca <sum_of_32bits>
+     bca:	18 2f       	mov	r17, r24
+     bcc:	c4 01       	movw	r24, r8
+     bce:	b3 01       	movw	r22, r6
+     bd0:	7c dc       	rcall	.-1800   	; 0x4ca <sum_of_32bits>
+     bd2:	94 2d       	mov	r25, r4
+     bd4:	95 0d       	add	r25, r5
+     bd6:	93 50       	subi	r25, 0x03	; 3
+     bd8:	91 0f       	add	r25, r17
+     bda:	98 0f       	add	r25, r24
+     bdc:	9c 0f       	add	r25, r28
+     bde:	90 95       	com	r25
+     be0:	90 93 bc 00 	sts	0x00BC, r25
+	UART_Transmit(API.checksum);           // Sends CRC to module	
+     be4:	89 2f       	mov	r24, r25
+     be6:	19 dc       	rcall	.-1998   	; 0x41a <UART_Transmit>
+
+	aux = TX_status();
+
+	while (aux == 5)
+	{
+		aux = TX_status();
+     be8:	5d de       	rcall	.-838    	; 0x8a4 <TX_status>
+	API.checksum = (0xFF - (uint8_t)(API.frame_type + API.frame_id + sum_of_32bits(DH) + sum_of_32bits(DL) + sum_of_16bits(dest_address) + broad_radius + tx_options + sum_of_char(data, size)) ) ;
+	UART_Transmit(API.checksum);           // Sends CRC to module	
+
+	aux = TX_status();
+
+	while (aux == 5)
+     bea:	85 30       	cpi	r24, 0x05	; 5
+     bec:	e9 f3       	breq	.-6      	; 0xbe8 <TX_req_64bit+0xd6>
+	{
+		aux = TX_status();
+	}
+
+	if (aux == 0)
+     bee:	88 23       	and	r24, r24
+     bf0:	29 f0       	breq	.+10     	; 0xbfc <TX_req_64bit+0xea>
+		return 0;
+	if ( aux == (0xFF) )
+     bf2:	8f 3f       	cpi	r24, 0xFF	; 255
+     bf4:	11 f0       	breq	.+4      	; 0xbfa <TX_req_64bit+0xe8>
+     bf6:	81 e0       	ldi	r24, 0x01	; 1
+     bf8:	01 c0       	rjmp	.+2      	; 0xbfc <TX_req_64bit+0xea>
+     bfa:	8f ef       	ldi	r24, 0xFF	; 255
+		return 0xFF; // UART Receive Timeout
+
+return 1; // ATENCAO: Dizer que foi mal transmitida significa desconeccao
+}
+     bfc:	df 91       	pop	r29
+     bfe:	cf 91       	pop	r28
+     c00:	1f 91       	pop	r17
+     c02:	0f 91       	pop	r16
+     c04:	ff 90       	pop	r15
+     c06:	ef 90       	pop	r14
+     c08:	df 90       	pop	r13
+     c0a:	cf 90       	pop	r12
+     c0c:	bf 90       	pop	r11
+     c0e:	af 90       	pop	r10
+     c10:	9f 90       	pop	r9
+     c12:	8f 90       	pop	r8
+     c14:	7f 90       	pop	r7
+     c16:	6f 90       	pop	r6
+     c18:	5f 90       	pop	r5
+     c1a:	4f 90       	pop	r4
+     c1c:	08 95       	ret
+
+00000c1e <get_config>:
+	}
+return 1;	
+}
+
+uint8_t get_config(uint32_t DL, uint32_t DH, uint16_t *sleep_time)
+{
+     c1e:	cf 92       	push	r12
+     c20:	df 92       	push	r13
+     c22:	ef 92       	push	r14
+     c24:	0f 93       	push	r16
+     c26:	1f 93       	push	r17
+     c28:	df 93       	push	r29
+     c2a:	cf 93       	push	r28
+     c2c:	0f 92       	push	r0
+     c2e:	cd b7       	in	r28, 0x3d	; 61
+     c30:	de b7       	in	r29, 0x3e	; 62
+     c32:	68 01       	movw	r12, r16
+	uint8_t size_data_rx, data[1], result_tx;
+	data[0]=PEDIDO_CONFIG;
+     c34:	e5 e6       	ldi	r30, 0x65	; 101
+     c36:	e9 83       	std	Y+1, r30	; 0x01
+	result_tx = TX_req_64bit(DL, DH, data, 1);
+     c38:	8e 01       	movw	r16, r28
+     c3a:	0f 5f       	subi	r16, 0xFF	; 255
+     c3c:	1f 4f       	sbci	r17, 0xFF	; 255
+     c3e:	ee 24       	eor	r14, r14
+     c40:	e3 94       	inc	r14
+     c42:	67 df       	rcall	.-306    	; 0xb12 <TX_req_64bit>
+	if ( result_tx == 0xFF)
+     c44:	8f 3f       	cpi	r24, 0xFF	; 255
+     c46:	19 f0       	breq	.+6      	; 0xc4e <get_config+0x30>
+		{CTS_XBEE_OFF; return 0xFF;}
+	size_data_rx = RX_64bit();
+     c48:	be dc       	rcall	.-1668   	; 0x5c6 <RX_64bit>
+	if ( size_data_rx == 0xFF)
+     c4a:	8f 3f       	cpi	r24, 0xFF	; 255
+     c4c:	19 f4       	brne	.+6      	; 0xc54 <get_config+0x36>
+		{CTS_XBEE_OFF; return 0xFF;}
+     c4e:	95 9a       	sbi	0x12, 5	; 18
+     c50:	2f ef       	ldi	r18, 0xFF	; 255
+     c52:	13 c0       	rjmp	.+38     	; 0xc7a <get_config+0x5c>
+CTS_XBEE_OFF;
+     c54:	95 9a       	sbi	0x12, 5	; 18
+	if (size_data_rx!=0)
+     c56:	88 23       	and	r24, r24
+     c58:	79 f0       	breq	.+30     	; 0xc78 <get_config+0x5a>
+	{
+		*sleep_time=_data_rx[0]; //ATENCAO - só recebe o tempo q dorme, 1byte
+		*sleep_time=(*sleep_time<<8);
+     c5a:	30 91 72 00 	lds	r19, 0x0072
+     c5e:	20 e0       	ldi	r18, 0x00	; 0
+     c60:	f6 01       	movw	r30, r12
+     c62:	31 83       	std	Z+1, r19	; 0x01
+     c64:	20 83       	st	Z, r18
+		*sleep_time=((*sleep_time)|(_data_rx[1]));
+     c66:	80 91 73 00 	lds	r24, 0x0073
+     c6a:	90 e0       	ldi	r25, 0x00	; 0
+     c6c:	82 2b       	or	r24, r18
+     c6e:	93 2b       	or	r25, r19
+     c70:	91 83       	std	Z+1, r25	; 0x01
+     c72:	80 83       	st	Z, r24
+     c74:	89 2b       	or	r24, r25
+     c76:	09 f4       	brne	.+2      	; 0xc7a <get_config+0x5c>
+     c78:	21 e0       	ldi	r18, 0x01	; 1
+		if(*sleep_time==0)
+			return 1;
+	return 0;
+	}	
+return 1;
+}
+     c7a:	82 2f       	mov	r24, r18
+     c7c:	0f 90       	pop	r0
+     c7e:	cf 91       	pop	r28
+     c80:	df 91       	pop	r29
+     c82:	1f 91       	pop	r17
+     c84:	0f 91       	pop	r16
+     c86:	ef 90       	pop	r14
+     c88:	df 90       	pop	r13
+     c8a:	cf 90       	pop	r12
+     c8c:	08 95       	ret
+
+00000c8e <I2C_init>:
+
+// Funcao para definir o bit rate em funcao do cpu Clock
+void I2C_init(void)
+{
+	
+	TWBR = (F_CPU / SCL_CLOCK - 16) / 2; //set bit rate for TWI, SCL f=100kHz
+     c8e:	82 e0       	ldi	r24, 0x02	; 2
+     c90:	80 b9       	out	0x00, r24	; 0
+	TWSR = 0x00;				//no prescaler value
+     c92:	11 b8       	out	0x01, r1	; 1
+}
+     c94:	08 95       	ret
+
+00000c96 <I2C_start>:
+
+// Funcao Envia Start - retorna 0 ou 1 se consegui
+unsigned char I2C_start(void)
+{
+	//TWI transmit start
+	TWCR = (1<<TWINT)|(1<<TWSTA)|(1<<TWEN);//send start condition
+     c96:	84 ea       	ldi	r24, 0xA4	; 164
+     c98:	86 bf       	out	0x36, r24	; 54
+	
+	while(!(TWCR & (1<<TWINT)));		//wait for TWINT flag set to indicate start condition has been transmitted
+     c9a:	06 b6       	in	r0, 0x36	; 54
+     c9c:	07 fe       	sbrs	r0, 7
+     c9e:	fd cf       	rjmp	.-6      	; 0xc9a <I2C_start+0x4>
+
+	if ((TWSR & STATUS_MASK) == START)	//check TWI status register
+     ca0:	81 b1       	in	r24, 0x01	; 1
+     ca2:	90 e0       	ldi	r25, 0x00	; 0
+     ca4:	88 7f       	andi	r24, 0xF8	; 248
+     ca6:	88 30       	cpi	r24, 0x08	; 8
+     ca8:	09 f0       	breq	.+2      	; 0xcac <I2C_start+0x16>
+     caa:	91 e0       	ldi	r25, 0x01	; 1
+		return(0);
+	else
+		return(1);
+}
+     cac:	89 2f       	mov	r24, r25
+     cae:	08 95       	ret
+
+00000cb0 <I2C_repeatStart>:
+
+// Funcao envia novo start para novo endereçaemnto
+unsigned char I2C_repeatStart(void)
+{
+	TWCR = (1<<TWINT)|(1<<TWSTA)|(1<<TWEN); 	//Send START condition
+     cb0:	84 ea       	ldi	r24, 0xA4	; 164
+     cb2:	86 bf       	out	0x36, r24	; 54
+    while (!(TWCR & (1<<TWINT)));   			//Wait for TWINT flag set. This indicates that the
+     cb4:	06 b6       	in	r0, 0x36	; 54
+     cb6:	07 fe       	sbrs	r0, 7
+     cb8:	fd cf       	rjmp	.-6      	; 0xcb4 <I2C_repeatStart+0x4>
+		  										//START condition has been transmitted
+    if ((TWSR & STATUS_MASK) == RESTART)	//Check value of TWI Status Register
+     cba:	81 b1       	in	r24, 0x01	; 1
+     cbc:	90 e0       	ldi	r25, 0x00	; 0
+     cbe:	88 7f       	andi	r24, 0xF8	; 248
+     cc0:	80 31       	cpi	r24, 0x10	; 16
+     cc2:	09 f0       	breq	.+2      	; 0xcc6 <I2C_repeatStart+0x16>
+     cc4:	91 e0       	ldi	r25, 0x01	; 1
+ 		return(0);
+	else
+		return(1);
+}
+     cc6:	89 2f       	mov	r24, r25
+     cc8:	08 95       	ret
+
+00000cca <I2C_sendAddr>:
+unsigned char I2C_sendAddr(unsigned char addr)
+{
+	//TWI transmit address in Master Transmit Mode
+	unsigned char STATUS;
+   
+	if((addr & 0x01) == 0) 
+     cca:	80 fd       	sbrc	r24, 0
+     ccc:	02 c0       	rjmp	.+4      	; 0xcd2 <I2C_sendAddr+0x8>
+     cce:	28 e1       	ldi	r18, 0x18	; 24
+     cd0:	01 c0       	rjmp	.+2      	; 0xcd4 <I2C_sendAddr+0xa>
+     cd2:	20 e4       	ldi	r18, 0x40	; 64
+		STATUS = MT_SLA_ACK;
+	else
+		STATUS = MR_SLA_ACK; 
+	
+	TWDR = addr;					//load SLA+W into TWDR register
+     cd4:	83 b9       	out	0x03, r24	; 3
+	TWCR = (1<<TWINT)|(1<<TWEN);
+     cd6:	84 e8       	ldi	r24, 0x84	; 132
+     cd8:	86 bf       	out	0x36, r24	; 54
+
+	while(!(TWCR & (1<<TWINT)));	//wait for TWINT flag set to indicate that SLA_W has been transmitted 
+     cda:	06 b6       	in	r0, 0x36	; 54
+     cdc:	07 fe       	sbrs	r0, 7
+     cde:	fd cf       	rjmp	.-6      	; 0xcda <I2C_sendAddr+0x10>
+	
+	if ((TWSR & STATUS_MASK) == STATUS)//check value of TWI status that ACK bit has been received
+     ce0:	81 b1       	in	r24, 0x01	; 1
+     ce2:	40 e0       	ldi	r20, 0x00	; 0
+     ce4:	90 e0       	ldi	r25, 0x00	; 0
+     ce6:	88 7f       	andi	r24, 0xF8	; 248
+     ce8:	90 70       	andi	r25, 0x00	; 0
+     cea:	30 e0       	ldi	r19, 0x00	; 0
+     cec:	82 17       	cp	r24, r18
+     cee:	93 07       	cpc	r25, r19
+     cf0:	09 f0       	breq	.+2      	; 0xcf4 <I2C_sendAddr+0x2a>
+     cf2:	41 e0       	ldi	r20, 0x01	; 1
+		return(0);
+	else 
+		return(1);
+}
+     cf4:	84 2f       	mov	r24, r20
+     cf6:	08 95       	ret
+
+00000cf8 <I2C_sendData>:
+
+// Funcao envia dados apos endereçamento
+unsigned char I2C_sendData(unsigned char data)
+{
+	//TWI transmit data in Master Transmit Mode
+	TWDR = data;					//load data into TWDR register
+     cf8:	83 b9       	out	0x03, r24	; 3
+	TWCR = (1<<TWINT)|(1<<TWEN);
+     cfa:	84 e8       	ldi	r24, 0x84	; 132
+     cfc:	86 bf       	out	0x36, r24	; 54
+
+	while(!(TWCR & (1<<TWINT)));		//wait for TWINT flag set to indicate data has been transmitted
+     cfe:	06 b6       	in	r0, 0x36	; 54
+     d00:	07 fe       	sbrs	r0, 7
+     d02:	fd cf       	rjmp	.-6      	; 0xcfe <I2C_sendData+0x6>
+		
+	if ((TWSR & STATUS_MASK) != MT_DATA_ACK)//check value of TWI status register
+     d04:	81 b1       	in	r24, 0x01	; 1
+     d06:	90 e0       	ldi	r25, 0x00	; 0
+     d08:	88 7f       	andi	r24, 0xF8	; 248
+     d0a:	88 32       	cpi	r24, 0x28	; 40
+     d0c:	09 f0       	breq	.+2      	; 0xd10 <I2C_sendData+0x18>
+     d0e:	91 e0       	ldi	r25, 0x01	; 1
+		return(1);
+	else
+		return(0);
+}
+     d10:	89 2f       	mov	r24, r25
+     d12:	08 95       	ret
+
+00000d14 <I2C_receiveData_ACK>:
+// Funcao para esperar o acknoleg do slave
+unsigned char I2C_receiveData_ACK(void)
+{
+  unsigned char data;
+  
+  TWCR = (1<<TWEA)|(1<<TWINT)|(1<<TWEN);
+     d14:	84 ec       	ldi	r24, 0xC4	; 196
+     d16:	86 bf       	out	0x36, r24	; 54
+  while (!(TWCR & (1<<TWINT)));	   	   //Wait for TWINT flag set. This indicates that the
+     d18:	06 b6       	in	r0, 0x36	; 54
+     d1a:	07 fe       	sbrs	r0, 7
+     d1c:	fd cf       	rjmp	.-6      	; 0xd18 <I2C_receiveData_ACK+0x4>
+   		 		   					   //data has been received
+
+  if ((TWSR & STATUS_MASK) != MR_DATA_ACK)    //Check value of TWI Status Register
+     d1e:	81 b1       	in	r24, 0x01	; 1
+     d20:	88 7f       	andi	r24, 0xF8	; 248
+     d22:	80 35       	cpi	r24, 0x50	; 80
+     d24:	11 f0       	breq	.+4      	; 0xd2a <I2C_receiveData_ACK+0x16>
+     d26:	8e e7       	ldi	r24, 0x7E	; 126
+     d28:	08 95       	ret
+   	  return(ERROR_CODE);
+  
+  data = TWDR;
+     d2a:	83 b1       	in	r24, 0x03	; 3
+  return(data);
+}
+     d2c:	08 95       	ret
+
+00000d2e <I2C_receiveData_NACK>:
+// funcao para not ackenolage do slave
+unsigned char I2C_receiveData_NACK(void)
+{
+  unsigned char data;
+  
+  TWCR = (1<<TWINT)|(1<<TWEN); // semAcklogement bit
+     d2e:	84 e8       	ldi	r24, 0x84	; 132
+     d30:	86 bf       	out	0x36, r24	; 54
+  
+  while (!(TWCR & (1<<TWINT)));	   	   //Wait for TWINT flag set. This indicates that the
+     d32:	06 b6       	in	r0, 0x36	; 54
+     d34:	07 fe       	sbrs	r0, 7
+     d36:	fd cf       	rjmp	.-6      	; 0xd32 <I2C_receiveData_NACK+0x4>
+   		 		   					   //data has been received
+  if ((TWSR & STATUS_MASK) != MR_DATA_NACK)    //Check value of TWI Status Register
+     d38:	81 b1       	in	r24, 0x01	; 1
+     d3a:	88 7f       	andi	r24, 0xF8	; 248
+     d3c:	88 35       	cpi	r24, 0x58	; 88
+     d3e:	11 f0       	breq	.+4      	; 0xd44 <I2C_receiveData_NACK+0x16>
+     d40:	8e e7       	ldi	r24, 0x7E	; 126
+     d42:	08 95       	ret
+   	  return(ERROR_CODE);
+  
+  data = TWDR;
+     d44:	83 b1       	in	r24, 0x03	; 3
+  return(data);
+}
+     d46:	08 95       	ret
+
+00000d48 <I2C_receiveData_NACKR>:
+unsigned char I2C_receiveData_NACKR(void)
+{
+  unsigned char data;
+  
+  TWCR = (1<<TWINT)|(1<<TWEN); // semAcklogement bit
+     d48:	84 e8       	ldi	r24, 0x84	; 132
+     d4a:	86 bf       	out	0x36, r24	; 54
+  
+  while (!(TWCR & (1<<TWINT)));	   	   //Wait for TWINT flag set. This indicates that the
+     d4c:	06 b6       	in	r0, 0x36	; 54
+     d4e:	07 fe       	sbrs	r0, 7
+     d50:	fd cf       	rjmp	.-6      	; 0xd4c <I2C_receiveData_NACKR+0x4>
+   		 		   					   //data has been received
+  if ((TWSR & STATUS_MASK) != MR_DATA_NACK)    //Check value of TWI Status Register
+     d52:	81 b1       	in	r24, 0x01	; 1
+     d54:	88 7f       	andi	r24, 0xF8	; 248
+     d56:	88 35       	cpi	r24, 0x58	; 88
+     d58:	11 f0       	breq	.+4      	; 0xd5e <I2C_receiveData_NACKR+0x16>
+     d5a:	8f ef       	ldi	r24, 0xFF	; 255
+     d5c:	08 95       	ret
+   	  return(0xff);
+  
+  data = TWDR;
+     d5e:	83 b1       	in	r24, 0x03	; 3
+  return(data);
+}
+     d60:	08 95       	ret
+
+00000d62 <I2C_stop>:
+
+// funcao para envio do b
+void I2C_stop(void)
+{
+	//TWI transmit stop
+	TWCR = (1<<TWINT)|(1<<TWEN)|(1<<TWSTO);	//transmit stop condition
+     d62:	84 e9       	ldi	r24, 0x94	; 148
+     d64:	86 bf       	out	0x36, r24	; 54
+}
+     d66:	08 95       	ret
+
+00000d68 <I2C_wait>:
+
+void I2C_wait (void)
+{
+while(!(TWCR & (1<<TWINT)));   
+     d68:	06 b6       	in	r0, 0x36	; 54
+     d6a:	07 fe       	sbrs	r0, 7
+     d6c:	fd cf       	rjmp	.-6      	; 0xd68 <I2C_wait>
+} 
+     d6e:	08 95       	ret
+
+00000d70 <tsl2561_calc_lux>:
+//
+// Return: unsigned int - the approximate illuminance (lux)
+//
+//////////////////////////////////////////////////////////////////////////////
+uint16_t tsl2561_calc_lux(uint16_t iGain, uint16_t tInt, uint16_t ch0,uint16_t ch1)
+{ 
+     d70:	6f 92       	push	r6
+     d72:	7f 92       	push	r7
+     d74:	8f 92       	push	r8
+     d76:	9f 92       	push	r9
+     d78:	af 92       	push	r10
+     d7a:	bf 92       	push	r11
+     d7c:	cf 92       	push	r12
+     d7e:	df 92       	push	r13
+     d80:	ef 92       	push	r14
+     d82:	ff 92       	push	r15
+     d84:	0f 93       	push	r16
+     d86:	1f 93       	push	r17
+     d88:	cf 93       	push	r28
+     d8a:	df 93       	push	r29
+     d8c:	e9 01       	movw	r28, r18
+unsigned long temp;   
+unsigned long lux;   
+unsigned long ratio1 = 0;   
+unsigned long ratio;    
+unsigned int b, m;   
+    switch (tInt)   
+     d8e:	61 15       	cp	r22, r1
+     d90:	71 05       	cpc	r23, r1
+     d92:	51 f0       	breq	.+20     	; 0xda8 <tsl2561_calc_lux+0x38>
+     d94:	61 30       	cpi	r22, 0x01	; 1
+     d96:	71 05       	cpc	r23, r1
+     d98:	71 f4       	brne	.+28     	; 0xdb6 <tsl2561_calc_lux+0x46>
+     d9a:	f7 ee       	ldi	r31, 0xE7	; 231
+     d9c:	ef 2e       	mov	r14, r31
+     d9e:	ff e0       	ldi	r31, 0x0F	; 15
+     da0:	ff 2e       	mov	r15, r31
+     da2:	01 2d       	mov	r16, r1
+     da4:	11 2d       	mov	r17, r1
+     da6:	0c c0       	rjmp	.+24     	; 0xdc0 <tsl2561_calc_lux+0x50>
+     da8:	e7 e1       	ldi	r30, 0x17	; 23
+     daa:	ee 2e       	mov	r14, r30
+     dac:	e5 e7       	ldi	r30, 0x75	; 117
+     dae:	fe 2e       	mov	r15, r30
+     db0:	01 2d       	mov	r16, r1
+     db2:	11 2d       	mov	r17, r1
+     db4:	05 c0       	rjmp	.+10     	; 0xdc0 <tsl2561_calc_lux+0x50>
+     db6:	e1 2c       	mov	r14, r1
+     db8:	74 e0       	ldi	r23, 0x04	; 4
+     dba:	f7 2e       	mov	r15, r23
+     dbc:	01 2d       	mov	r16, r1
+     dbe:	11 2d       	mov	r17, r1
+        case 1: chScale = CHSCALE_TINT1;   
+                break;                      // 101 msec    
+        default:chScale = (1 << CH_SCALE);   
+                break;                      // assume no scaling    
+        }   
+    if (!iGain)                             // scale if gain is NOT 16X    
+     dc0:	89 2b       	or	r24, r25
+     dc2:	39 f4       	brne	.+14     	; 0xdd2 <tsl2561_calc_lux+0x62>
+        chScale = chScale << 4;           	// scale 1X to 16X    
+     dc4:	64 e0       	ldi	r22, 0x04	; 4
+     dc6:	ee 0c       	add	r14, r14
+     dc8:	ff 1c       	adc	r15, r15
+     dca:	00 1f       	adc	r16, r16
+     dcc:	11 1f       	adc	r17, r17
+     dce:	6a 95       	dec	r22
+     dd0:	d1 f7       	brne	.-12     	; 0xdc6 <tsl2561_calc_lux+0x56>
+                                            // scale the channel values    
+    channel0 = (ch0 * chScale) >> CH_SCALE;   
+     dd2:	9a 01       	movw	r18, r20
+     dd4:	40 e0       	ldi	r20, 0x00	; 0
+     dd6:	50 e0       	ldi	r21, 0x00	; 0
+     dd8:	c8 01       	movw	r24, r16
+     dda:	b7 01       	movw	r22, r14
+     ddc:	22 d1       	rcall	.+580    	; 0x1022 <__mulsi3>
+     dde:	5b 01       	movw	r10, r22
+     de0:	6c 01       	movw	r12, r24
+     de2:	5a e0       	ldi	r21, 0x0A	; 10
+     de4:	d6 94       	lsr	r13
+     de6:	c7 94       	ror	r12
+     de8:	b7 94       	ror	r11
+     dea:	a7 94       	ror	r10
+     dec:	5a 95       	dec	r21
+     dee:	d1 f7       	brne	.-12     	; 0xde4 <tsl2561_calc_lux+0x74>
+    channel1 = (ch1 * chScale) >> CH_SCALE;   
+     df0:	9e 01       	movw	r18, r28
+     df2:	40 e0       	ldi	r20, 0x00	; 0
+     df4:	50 e0       	ldi	r21, 0x00	; 0
+     df6:	c8 01       	movw	r24, r16
+     df8:	b7 01       	movw	r22, r14
+     dfa:	13 d1       	rcall	.+550    	; 0x1022 <__mulsi3>
+     dfc:	3b 01       	movw	r6, r22
+     dfe:	4c 01       	movw	r8, r24
+     e00:	4a e0       	ldi	r20, 0x0A	; 10
+     e02:	96 94       	lsr	r9
+     e04:	87 94       	ror	r8
+     e06:	77 94       	ror	r7
+     e08:	67 94       	ror	r6
+     e0a:	4a 95       	dec	r20
+     e0c:	d1 f7       	brne	.-12     	; 0xe02 <tsl2561_calc_lux+0x92>
+// find the ratio of the channel values (Channel1/Channel0)    
+// protect against divide by zero    
+    if (channel0 != 0)    
+     e0e:	a1 14       	cp	r10, r1
+     e10:	b1 04       	cpc	r11, r1
+     e12:	c1 04       	cpc	r12, r1
+     e14:	d1 04       	cpc	r13, r1
+     e16:	29 f4       	brne	.+10     	; 0xe22 <tsl2561_calc_lux+0xb2>
+     e18:	80 e0       	ldi	r24, 0x00	; 0
+     e1a:	90 e0       	ldi	r25, 0x00	; 0
+     e1c:	a0 e0       	ldi	r26, 0x00	; 0
+     e1e:	b0 e0       	ldi	r27, 0x00	; 0
+     e20:	0e c0       	rjmp	.+28     	; 0xe3e <tsl2561_calc_lux+0xce>
+        ratio1 = (channel1 << (RATIO_SCALE+1)) / channel0;   
+     e22:	c4 01       	movw	r24, r8
+     e24:	b3 01       	movw	r22, r6
+     e26:	3a e0       	ldi	r19, 0x0A	; 10
+     e28:	66 0f       	add	r22, r22
+     e2a:	77 1f       	adc	r23, r23
+     e2c:	88 1f       	adc	r24, r24
+     e2e:	99 1f       	adc	r25, r25
+     e30:	3a 95       	dec	r19
+     e32:	d1 f7       	brne	.-12     	; 0xe28 <tsl2561_calc_lux+0xb8>
+     e34:	a6 01       	movw	r20, r12
+     e36:	95 01       	movw	r18, r10
+     e38:	13 d1       	rcall	.+550    	; 0x1060 <__udivmodsi4>
+     e3a:	c9 01       	movw	r24, r18
+     e3c:	da 01       	movw	r26, r20
+    ratio = (ratio1 + 1) >> 1;                    // round the ratio value    
+     e3e:	01 96       	adiw	r24, 0x01	; 1
+     e40:	a1 1d       	adc	r26, r1
+     e42:	b1 1d       	adc	r27, r1
+     e44:	b6 95       	lsr	r27
+     e46:	a7 95       	ror	r26
+     e48:	97 95       	ror	r25
+     e4a:	87 95       	ror	r24
+   
+    if ((ratio >= 0) && (ratio <= K1T))           // is ratio <= eachBreak ?    
+     e4c:	81 34       	cpi	r24, 0x41	; 65
+     e4e:	91 05       	cpc	r25, r1
+     e50:	a1 05       	cpc	r26, r1
+     e52:	b1 05       	cpc	r27, r1
+     e54:	28 f4       	brcc	.+10     	; 0xe60 <tsl2561_calc_lux+0xf0>
+     e56:	62 ef       	ldi	r22, 0xF2	; 242
+     e58:	71 e0       	ldi	r23, 0x01	; 1
+     e5a:	ce eb       	ldi	r28, 0xBE	; 190
+     e5c:	d1 e0       	ldi	r29, 0x01	; 1
+     e5e:	49 c0       	rjmp	.+146    	; 0xef2 <tsl2561_calc_lux+0x182>
+        {b=B1T; m=M1T;}   
+    else    
+        if (ratio <= K2T)   
+     e60:	81 38       	cpi	r24, 0x81	; 129
+     e62:	91 05       	cpc	r25, r1
+     e64:	a1 05       	cpc	r26, r1
+     e66:	b1 05       	cpc	r27, r1
+     e68:	28 f4       	brcc	.+10     	; 0xe74 <tsl2561_calc_lux+0x104>
+     e6a:	64 e1       	ldi	r22, 0x14	; 20
+     e6c:	72 e0       	ldi	r23, 0x02	; 2
+     e6e:	c1 ed       	ldi	r28, 0xD1	; 209
+     e70:	d2 e0       	ldi	r29, 0x02	; 2
+     e72:	3f c0       	rjmp	.+126    	; 0xef2 <tsl2561_calc_lux+0x182>
+            {b=B2T; m=M2T;}   
+        else    
+            if (ratio <= K3T)   
+     e74:	81 3c       	cpi	r24, 0xC1	; 193
+     e76:	91 05       	cpc	r25, r1
+     e78:	a1 05       	cpc	r26, r1
+     e7a:	b1 05       	cpc	r27, r1
+     e7c:	28 f4       	brcc	.+10     	; 0xe88 <tsl2561_calc_lux+0x118>
+     e7e:	6f e3       	ldi	r22, 0x3F	; 63
+     e80:	72 e0       	ldi	r23, 0x02	; 2
+     e82:	cb e7       	ldi	r28, 0x7B	; 123
+     e84:	d3 e0       	ldi	r29, 0x03	; 3
+     e86:	35 c0       	rjmp	.+106    	; 0xef2 <tsl2561_calc_lux+0x182>
+                {b=B3T; m=M3T;}   
+            else    
+                if (ratio <= K4T)   
+     e88:	81 30       	cpi	r24, 0x01	; 1
+     e8a:	21 e0       	ldi	r18, 0x01	; 1
+     e8c:	92 07       	cpc	r25, r18
+     e8e:	20 e0       	ldi	r18, 0x00	; 0
+     e90:	a2 07       	cpc	r26, r18
+     e92:	20 e0       	ldi	r18, 0x00	; 0
+     e94:	b2 07       	cpc	r27, r18
+     e96:	28 f4       	brcc	.+10     	; 0xea2 <tsl2561_calc_lux+0x132>
+     e98:	60 e7       	ldi	r22, 0x70	; 112
+     e9a:	72 e0       	ldi	r23, 0x02	; 2
+     e9c:	ce ef       	ldi	r28, 0xFE	; 254
+     e9e:	d3 e0       	ldi	r29, 0x03	; 3
+     ea0:	28 c0       	rjmp	.+80     	; 0xef2 <tsl2561_calc_lux+0x182>
+                    {b=B4T; m=M4T;}   
+                else    
+                    if (ratio <= K5T)   
+     ea2:	89 33       	cpi	r24, 0x39	; 57
+     ea4:	21 e0       	ldi	r18, 0x01	; 1
+     ea6:	92 07       	cpc	r25, r18
+     ea8:	20 e0       	ldi	r18, 0x00	; 0
+     eaa:	a2 07       	cpc	r26, r18
+     eac:	20 e0       	ldi	r18, 0x00	; 0
+     eae:	b2 07       	cpc	r27, r18
+     eb0:	28 f4       	brcc	.+10     	; 0xebc <tsl2561_calc_lux+0x14c>
+     eb2:	6f e6       	ldi	r22, 0x6F	; 111
+     eb4:	71 e0       	ldi	r23, 0x01	; 1
+     eb6:	cc ef       	ldi	r28, 0xFC	; 252
+     eb8:	d1 e0       	ldi	r29, 0x01	; 1
+     eba:	1b c0       	rjmp	.+54     	; 0xef2 <tsl2561_calc_lux+0x182>
+                        {b=B5T; m=M5T;}   
+                    else   
+                        if (ratio <= K6T)   
+     ebc:	8b 39       	cpi	r24, 0x9B	; 155
+     ebe:	21 e0       	ldi	r18, 0x01	; 1
+     ec0:	92 07       	cpc	r25, r18
+     ec2:	20 e0       	ldi	r18, 0x00	; 0
+     ec4:	a2 07       	cpc	r26, r18
+     ec6:	20 e0       	ldi	r18, 0x00	; 0
+     ec8:	b2 07       	cpc	r27, r18
+     eca:	28 f4       	brcc	.+10     	; 0xed6 <tsl2561_calc_lux+0x166>
+     ecc:	62 ed       	ldi	r22, 0xD2	; 210
+     ece:	70 e0       	ldi	r23, 0x00	; 0
+     ed0:	cb ef       	ldi	r28, 0xFB	; 251
+     ed2:	d0 e0       	ldi	r29, 0x00	; 0
+     ed4:	0e c0       	rjmp	.+28     	; 0xef2 <tsl2561_calc_lux+0x182>
+                            {b=B6T; m=M6T;}   
+                        else   
+                            if (ratio <= K7T)   
+     ed6:	8b 59       	subi	r24, 0x9B	; 155
+     ed8:	92 40       	sbci	r25, 0x02	; 2
+     eda:	a0 40       	sbci	r26, 0x00	; 0
+     edc:	b0 40       	sbci	r27, 0x00	; 0
+     ede:	28 f0       	brcs	.+10     	; 0xeea <tsl2561_calc_lux+0x17a>
+     ee0:	60 e0       	ldi	r22, 0x00	; 0
+     ee2:	70 e0       	ldi	r23, 0x00	; 0
+     ee4:	c0 e0       	ldi	r28, 0x00	; 0
+     ee6:	d0 e0       	ldi	r29, 0x00	; 0
+     ee8:	04 c0       	rjmp	.+8      	; 0xef2 <tsl2561_calc_lux+0x182>
+     eea:	68 e1       	ldi	r22, 0x18	; 24
+     eec:	70 e0       	ldi	r23, 0x00	; 0
+     eee:	c2 e1       	ldi	r28, 0x12	; 18
+     ef0:	d0 e0       	ldi	r29, 0x00	; 0
+                                {b=B7T; m=M7T;}   
+                            else    
+                                if (ratio > K8T)   
+                                    {b=B8T; m=M8T;}   
+    temp = ((channel0 * b) - (channel1 * m));   
+     ef2:	80 e0       	ldi	r24, 0x00	; 0
+     ef4:	90 e0       	ldi	r25, 0x00	; 0
+     ef6:	a6 01       	movw	r20, r12
+     ef8:	95 01       	movw	r18, r10
+     efa:	93 d0       	rcall	.+294    	; 0x1022 <__mulsi3>
+     efc:	7b 01       	movw	r14, r22
+     efe:	8c 01       	movw	r16, r24
+     f00:	80 e0       	ldi	r24, 0x00	; 0
+     f02:	90 e2       	ldi	r25, 0x20	; 32
+     f04:	a0 e0       	ldi	r26, 0x00	; 0
+     f06:	b0 e0       	ldi	r27, 0x00	; 0
+     f08:	e8 0e       	add	r14, r24
+     f0a:	f9 1e       	adc	r15, r25
+     f0c:	0a 1f       	adc	r16, r26
+     f0e:	1b 1f       	adc	r17, r27
+     f10:	be 01       	movw	r22, r28
+     f12:	80 e0       	ldi	r24, 0x00	; 0
+     f14:	90 e0       	ldi	r25, 0x00	; 0
+     f16:	a4 01       	movw	r20, r8
+     f18:	93 01       	movw	r18, r6
+     f1a:	83 d0       	rcall	.+262    	; 0x1022 <__mulsi3>
+     f1c:	e6 1a       	sub	r14, r22
+     f1e:	f7 0a       	sbc	r15, r23
+     f20:	08 0b       	sbc	r16, r24
+     f22:	19 0b       	sbc	r17, r25
+     f24:	8e e0       	ldi	r24, 0x0E	; 14
+     f26:	16 95       	lsr	r17
+     f28:	07 95       	ror	r16
+     f2a:	f7 94       	ror	r15
+     f2c:	e7 94       	ror	r14
+     f2e:	8a 95       	dec	r24
+     f30:	d1 f7       	brne	.-12     	; 0xf26 <tsl2561_calc_lux+0x1b6>
+        temp = 0;   
+    temp += (1 << (LUX_SCALE-1));         // round lsb (2^(LUX_SCALE.1))    
+   
+    lux = temp >> LUX_SCALE;              // strip off fractional portion    
+    return(lux);   
+}
+     f32:	c7 01       	movw	r24, r14
+     f34:	df 91       	pop	r29
+     f36:	cf 91       	pop	r28
+     f38:	1f 91       	pop	r17
+     f3a:	0f 91       	pop	r16
+     f3c:	ff 90       	pop	r15
+     f3e:	ef 90       	pop	r14
+     f40:	df 90       	pop	r13
+     f42:	cf 90       	pop	r12
+     f44:	bf 90       	pop	r11
+     f46:	af 90       	pop	r10
+     f48:	9f 90       	pop	r9
+     f4a:	8f 90       	pop	r8
+     f4c:	7f 90       	pop	r7
+     f4e:	6f 90       	pop	r6
+     f50:	08 95       	ret
+
+00000f52 <tsl2561_read_ch1>:
+
+return ((data1<<8) + (data0));	
+}
+
+uint16_t tsl2561_read_ch1(uint8_t addr)
+{
+     f52:	ff 92       	push	r15
+     f54:	0f 93       	push	r16
+     f56:	1f 93       	push	r17
+     f58:	18 2f       	mov	r17, r24
+uint8_t data0, data1;
+	I2C_start();
+     f5a:	9d de       	rcall	.-710    	; 0xc96 <I2C_start>
+	I2C_sendAddr(addr); // modo escrita
+     f5c:	81 2f       	mov	r24, r17
+     f5e:	b5 de       	rcall	.-662    	; 0xcca <I2C_sendAddr>
+	I2C_sendData(0x8E); // comando LSB
+     f60:	8e e8       	ldi	r24, 0x8E	; 142
+     f62:	ca de       	rcall	.-620    	; 0xcf8 <I2C_sendData>
+
+	I2C_repeatStart();
+     f64:	a5 de       	rcall	.-694    	; 0xcb0 <I2C_repeatStart>
+    I2C_sendAddr(addr+1);
+     f66:	01 2f       	mov	r16, r17
+     f68:	0f 5f       	subi	r16, 0xFF	; 255
+     f6a:	80 2f       	mov	r24, r16
+     f6c:	ae de       	rcall	.-676    	; 0xcca <I2C_sendAddr>
+	data0=I2C_receiveData_NACK();
+     f6e:	df de       	rcall	.-578    	; 0xd2e <I2C_receiveData_NACK>
+     f70:	f8 2e       	mov	r15, r24
+	I2C_stop();
+     f72:	f7 de       	rcall	.-530    	; 0xd62 <I2C_stop>
+
+   	I2C_start();
+     f74:	90 de       	rcall	.-736    	; 0xc96 <I2C_start>
+	I2C_sendAddr(addr); // modo escrita
+     f76:	81 2f       	mov	r24, r17
+     f78:	a8 de       	rcall	.-688    	; 0xcca <I2C_sendAddr>
+	I2C_sendData(0x8F); // comando MSB
+     f7a:	8f e8       	ldi	r24, 0x8F	; 143
+     f7c:	bd de       	rcall	.-646    	; 0xcf8 <I2C_sendData>
+
+	I2C_start(); 
+     f7e:	8b de       	rcall	.-746    	; 0xc96 <I2C_start>
+    I2C_sendAddr(addr+1); // comando MSB
+     f80:	80 2f       	mov	r24, r16
+     f82:	a3 de       	rcall	.-698    	; 0xcca <I2C_sendAddr>
+	data1=I2C_receiveData_NACK();
+     f84:	d4 de       	rcall	.-600    	; 0xd2e <I2C_receiveData_NACK>
+     f86:	18 2f       	mov	r17, r24
+	I2C_stop();
+     f88:	ec de       	rcall	.-552    	; 0xd62 <I2C_stop>
+     f8a:	31 2f       	mov	r19, r17
+     f8c:	20 e0       	ldi	r18, 0x00	; 0
+     f8e:	2f 0d       	add	r18, r15
+     f90:	31 1d       	adc	r19, r1
+return ((data1<<8) + (data0));
+}
+     f92:	c9 01       	movw	r24, r18
+     f94:	1f 91       	pop	r17
+     f96:	0f 91       	pop	r16
+     f98:	ff 90       	pop	r15
+     f9a:	08 95       	ret
+
+00000f9c <tsl2561_read_ch0>:
+	I2C_stop();
+return 0;	
+}
+
+uint16_t tsl2561_read_ch0(uint8_t addr)
+{
+     f9c:	ff 92       	push	r15
+     f9e:	0f 93       	push	r16
+     fa0:	1f 93       	push	r17
+     fa2:	18 2f       	mov	r17, r24
+uint8_t data0=0, data1=1, aux1=0x9C, aux2=0x9C;
+	I2C_start();
+     fa4:	78 de       	rcall	.-784    	; 0xc96 <I2C_start>
+	aux1=I2C_sendAddr(addr); // modo escrita
+     fa6:	81 2f       	mov	r24, r17
+     fa8:	90 de       	rcall	.-736    	; 0xcca <I2C_sendAddr>
+	aux2=I2C_sendData(0x8C); // comando LSB
+     faa:	8c e8       	ldi	r24, 0x8C	; 140
+     fac:	a5 de       	rcall	.-694    	; 0xcf8 <I2C_sendData>
+
+	I2C_repeatStart();
+     fae:	80 de       	rcall	.-768    	; 0xcb0 <I2C_repeatStart>
+    aux1=I2C_sendAddr(addr+1);
+     fb0:	01 2f       	mov	r16, r17
+     fb2:	0f 5f       	subi	r16, 0xFF	; 255
+     fb4:	80 2f       	mov	r24, r16
+     fb6:	89 de       	rcall	.-750    	; 0xcca <I2C_sendAddr>
+	data0=I2C_receiveData_NACK();
+     fb8:	ba de       	rcall	.-652    	; 0xd2e <I2C_receiveData_NACK>
+     fba:	f8 2e       	mov	r15, r24
+	I2C_stop();
+     fbc:	d2 de       	rcall	.-604    	; 0xd62 <I2C_stop>
+
+   	I2C_start();
+     fbe:	6b de       	rcall	.-810    	; 0xc96 <I2C_start>
+	I2C_sendAddr(addr); // modo escrita
+     fc0:	81 2f       	mov	r24, r17
+     fc2:	83 de       	rcall	.-762    	; 0xcca <I2C_sendAddr>
+	I2C_sendData(0x8D); // comando MSB
+     fc4:	8d e8       	ldi	r24, 0x8D	; 141
+     fc6:	98 de       	rcall	.-720    	; 0xcf8 <I2C_sendData>
+
+	I2C_start(); 
+     fc8:	66 de       	rcall	.-820    	; 0xc96 <I2C_start>
+    I2C_sendAddr(addr+1); // comando MSB
+     fca:	80 2f       	mov	r24, r16
+     fcc:	7e de       	rcall	.-772    	; 0xcca <I2C_sendAddr>
+	data1=I2C_receiveData_NACK();
+     fce:	af de       	rcall	.-674    	; 0xd2e <I2C_receiveData_NACK>
+     fd0:	18 2f       	mov	r17, r24
+	I2C_stop();
+     fd2:	c7 de       	rcall	.-626    	; 0xd62 <I2C_stop>
+     fd4:	31 2f       	mov	r19, r17
+     fd6:	20 e0       	ldi	r18, 0x00	; 0
+     fd8:	2f 0d       	add	r18, r15
+     fda:	31 1d       	adc	r19, r1
+
+return ((data1<<8) + (data0));	
+}
+     fdc:	c9 01       	movw	r24, r18
+     fde:	1f 91       	pop	r17
+     fe0:	0f 91       	pop	r16
+     fe2:	ff 90       	pop	r15
+     fe4:	08 95       	ret
+
+00000fe6 <tsl2561_init>:
+#include "tools.h"
+#include "uart.h"
+
+int tsl2561_init(uint8_t addr)
+{
+     fe6:	1f 93       	push	r17
+     fe8:	18 2f       	mov	r17, r24
+uint8_t aux1=0xFF, aux2=0xFF, aux3=0xFF;
+	I2C_start();
+     fea:	55 de       	rcall	.-854    	; 0xc96 <I2C_start>
+	aux1=I2C_sendAddr(addr); // modo escrita
+     fec:	81 2f       	mov	r24, r17
+     fee:	6d de       	rcall	.-806    	; 0xcca <I2C_sendAddr>
+	aux2=I2C_sendData(0x81); // Timing Register, 
+     ff0:	81 e8       	ldi	r24, 0x81	; 129
+     ff2:	82 de       	rcall	.-764    	; 0xcf8 <I2C_sendData>
+	aux3=I2C_sendData(TSL_TINT); // integration time of 0x02 402ms, 0x01 101ms, 0x00 13.7ms
+     ff4:	81 e0       	ldi	r24, 0x01	; 1
+     ff6:	80 de       	rcall	.-768    	; 0xcf8 <I2C_sendData>
+	I2C_stop();
+     ff8:	b4 de       	rcall	.-664    	; 0xd62 <I2C_stop>
+UART_Transmit(aux1);
+UART_Transmit(aux2);
+UART_Transmit(aux3);
+UART_Transmit(0xFA);
+*/
+	I2C_start();
+     ffa:	4d de       	rcall	.-870    	; 0xc96 <I2C_start>
+	aux1=I2C_sendAddr(addr); // modo escrita
+     ffc:	81 2f       	mov	r24, r17
+     ffe:	65 de       	rcall	.-822    	; 0xcca <I2C_sendAddr>
+	aux2=I2C_sendData(0x86); // Interrpt Control Resgister
+    1000:	86 e8       	ldi	r24, 0x86	; 134
+    1002:	7a de       	rcall	.-780    	; 0xcf8 <I2C_sendData>
+	aux3=I2C_sendData(0x00); // 00 Disable Interrupt | 0x10 Every ADC cycle generate one interrupt
+    1004:	80 e0       	ldi	r24, 0x00	; 0
+    1006:	78 de       	rcall	.-784    	; 0xcf8 <I2C_sendData>
+	I2C_stop();
+    1008:	ac de       	rcall	.-680    	; 0xd62 <I2C_stop>
+
+	I2C_start();
+    100a:	45 de       	rcall	.-886    	; 0xc96 <I2C_start>
+	aux1=I2C_sendAddr(addr); // modo escrita
+    100c:	81 2f       	mov	r24, r17
+    100e:	5d de       	rcall	.-838    	; 0xcca <I2C_sendAddr>
+	aux2=I2C_sendData(0x80); // Control Resgister - start continuous measures
+    1010:	80 e8       	ldi	r24, 0x80	; 128
+    1012:	72 de       	rcall	.-796    	; 0xcf8 <I2C_sendData>
+	aux3=I2C_sendData(0x03); // Powered Up
+    1014:	83 e0       	ldi	r24, 0x03	; 3
+    1016:	70 de       	rcall	.-800    	; 0xcf8 <I2C_sendData>
+	I2C_stop();
+    1018:	a4 de       	rcall	.-696    	; 0xd62 <I2C_stop>
+return 0;	
+}
+    101a:	80 e0       	ldi	r24, 0x00	; 0
+    101c:	90 e0       	ldi	r25, 0x00	; 0
+    101e:	1f 91       	pop	r17
+    1020:	08 95       	ret
+
+00001022 <__mulsi3>:
+    1022:	62 9f       	mul	r22, r18
+    1024:	d0 01       	movw	r26, r0
+    1026:	73 9f       	mul	r23, r19
+    1028:	f0 01       	movw	r30, r0
+    102a:	82 9f       	mul	r24, r18
+    102c:	e0 0d       	add	r30, r0
+    102e:	f1 1d       	adc	r31, r1
+    1030:	64 9f       	mul	r22, r20
+    1032:	e0 0d       	add	r30, r0
+    1034:	f1 1d       	adc	r31, r1
+    1036:	92 9f       	mul	r25, r18
+    1038:	f0 0d       	add	r31, r0
+    103a:	83 9f       	mul	r24, r19
+    103c:	f0 0d       	add	r31, r0
+    103e:	74 9f       	mul	r23, r20
+    1040:	f0 0d       	add	r31, r0
+    1042:	65 9f       	mul	r22, r21
+    1044:	f0 0d       	add	r31, r0
+    1046:	99 27       	eor	r25, r25
+    1048:	72 9f       	mul	r23, r18
+    104a:	b0 0d       	add	r27, r0
+    104c:	e1 1d       	adc	r30, r1
+    104e:	f9 1f       	adc	r31, r25
+    1050:	63 9f       	mul	r22, r19
+    1052:	b0 0d       	add	r27, r0
+    1054:	e1 1d       	adc	r30, r1
+    1056:	f9 1f       	adc	r31, r25
+    1058:	bd 01       	movw	r22, r26
+    105a:	cf 01       	movw	r24, r30
+    105c:	11 24       	eor	r1, r1
+    105e:	08 95       	ret
+
+00001060 <__udivmodsi4>:
+    1060:	a1 e2       	ldi	r26, 0x21	; 33
+    1062:	1a 2e       	mov	r1, r26
+    1064:	aa 1b       	sub	r26, r26
+    1066:	bb 1b       	sub	r27, r27
+    1068:	fd 01       	movw	r30, r26
+    106a:	0d c0       	rjmp	.+26     	; 0x1086 <__udivmodsi4_ep>
+
+0000106c <__udivmodsi4_loop>:
+    106c:	aa 1f       	adc	r26, r26
+    106e:	bb 1f       	adc	r27, r27
+    1070:	ee 1f       	adc	r30, r30
+    1072:	ff 1f       	adc	r31, r31
+    1074:	a2 17       	cp	r26, r18
+    1076:	b3 07       	cpc	r27, r19
+    1078:	e4 07       	cpc	r30, r20
+    107a:	f5 07       	cpc	r31, r21
+    107c:	20 f0       	brcs	.+8      	; 0x1086 <__udivmodsi4_ep>
+    107e:	a2 1b       	sub	r26, r18
+    1080:	b3 0b       	sbc	r27, r19
+    1082:	e4 0b       	sbc	r30, r20
+    1084:	f5 0b       	sbc	r31, r21
+
+00001086 <__udivmodsi4_ep>:
+    1086:	66 1f       	adc	r22, r22
+    1088:	77 1f       	adc	r23, r23
+    108a:	88 1f       	adc	r24, r24
+    108c:	99 1f       	adc	r25, r25
+    108e:	1a 94       	dec	r1
+    1090:	69 f7       	brne	.-38     	; 0x106c <__udivmodsi4_loop>
+    1092:	60 95       	com	r22
+    1094:	70 95       	com	r23
+    1096:	80 95       	com	r24
+    1098:	90 95       	com	r25
+    109a:	9b 01       	movw	r18, r22
+    109c:	ac 01       	movw	r20, r24
+    109e:	bd 01       	movw	r22, r26
+    10a0:	cf 01       	movw	r24, r30
+    10a2:	08 95       	ret
+
+000010a4 <_exit>:
+    10a4:	f8 94       	cli
+
+000010a6 <__stop_program>:
+    10a6:	ff cf       	rjmp	.-2      	; 0x10a6 <__stop_program>
